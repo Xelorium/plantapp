@@ -63,34 +63,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     },
                     child: const Text('Continue'),
                   ),
-                  const SizedBox(height: 16),
-                  Text.rich(
-                    TextSpan(
-                      text: 'By tapping next, you are agreeing to PlantID\n',
-                      style: TextStyle(
-                        color: AppColors.textTerms.withValues(alpha: .7),
-                        fontSize: 11,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: 'Terms of Use',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            decorationColor: AppColors.textTerms.withValues(alpha: .7),
+                  const SizedBox(height: 24), // Buton ile noktalar arası boşluk
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      getOnboardPage(context: context).length, // Sayfa sayısı kadar nokta
+                          (index) {
+                        return AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          margin: const EdgeInsets.symmetric(horizontal: 4),
+                          height: _currentIndex == index ? 10 : 6, // Aktif/Pasif yükseklik (Tasarımda hepsi yuvarlak görünüyor)
+                          width: _currentIndex == index ? 10 : 6, // Aktif/Pasif genişlik (Tasarımda hepsi yuvarlak görünüyor)
+                          decoration: BoxDecoration(
+                            color: _currentIndex == index
+                                ? AppColors.secondary // Aktif renk (Yeşil)
+                                : AppColors.secondary.withValues(alpha: 0.25), // Pasif renk (Gri/Silik Yeşil)
+                            shape: BoxShape.circle,
                           ),
-                        ),
-                        const TextSpan(text: ' & '),
-                        TextSpan(
-                          text: 'Privacy Policy',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            decorationColor: AppColors.textTerms.withValues(alpha: .7),
-                          ),
-                        ),
-                        const TextSpan(text: '.'),
-                      ],
+                        );
+                      },
                     ),
-                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
