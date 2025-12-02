@@ -21,6 +21,7 @@ class AppColors {
   static const Color textPrimary = Color(0xFF13231B);
   static const Color textSecondary = Color(0xFF979798); // Grey subtext
   static const Color textHint = Color(0xFFAFAFAF);
+  static const Color textTerms = Color(0xFF597165);
 
   // Status & Accents
   static const Color premiumGold = Color(0xFFD4AF37); // For the Premium banner icon

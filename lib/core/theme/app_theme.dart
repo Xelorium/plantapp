@@ -23,7 +23,7 @@ abstract final class AppTheme {
       // Typography - Using Rubik as it closely matches the geometric sans-serif in screenshots
       textTheme: const TextTheme(
         displayLarge: TextStyle(
-          fontSize: 30,
+          fontSize: 28,
           fontWeight: FontWeight.bold,
           color: AppColors.textPrimary,
           height: 1.2,
@@ -114,7 +114,6 @@ abstract final class AppTheme {
     );
   }
 
-
   static ThemeData get darkTheme {
     return ThemeData(
       useMaterial3: true,
@@ -134,7 +133,7 @@ abstract final class AppTheme {
       // Typography
       textTheme: const TextTheme(
         displayLarge: TextStyle(
-          fontSize: 30,
+          fontSize: 28,
           fontWeight: FontWeight.bold,
           color: AppColors.textPrimaryDark,
           height: 1.2,
@@ -178,10 +177,7 @@ abstract final class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-          ),
+          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
           elevation: 0,
         ),
       ),
