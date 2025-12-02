@@ -14,44 +14,46 @@ class OnboardingOneContent extends StatelessWidget {
           child: Align(
             alignment: Alignment.topLeft,
             child: SizedBox(
-              width: double.infinity,
               child: Stack(
                 children: [
                   Positioned(
                     top: 45, // Metne göre dikey konumu (Deneme-yanılma ile ayarlayın)
-                    right: 45, // "identify" kelimesinin altına denk gelecek şekilde hizalayın
+                    right: 0, // "identify" kelimesinin altına denk gelecek şekilde hizalayın
                     child: Image.asset(
                       'assets/images/brush_line.png', // Görsel yolunu buraya ekleyin
                       width: 126, // Çizgi genişliği
                       fit: BoxFit.contain,
                     ),
                   ),
-                  Text.rich(
-                    TextSpan(
-                      text: 'Take a photo to ',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w500,
-                        color: theme.colorScheme.secondary,
+                  Padding(
+                    padding: const EdgeInsets.only(right: 32),
+                    child: Text.rich(
+                      TextSpan(
+                        text: 'Take a photo to ',
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.w500,
+                          color: theme.colorScheme.secondary,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: 'identify\n',
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.w800,
+                              color: theme.colorScheme.secondary,
+                            ),
+                          ),
+                          TextSpan(
+                            text: 'the plant!',
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.w500,
+                              color: theme.colorScheme.secondary,
+                            ),
+                          ),
+                        ],
                       ),
-                      children: [
-                        TextSpan(
-                          text: 'identify\n',
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w800,
-                            color: theme.colorScheme.secondary,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'the plant!',
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w500,
-                            color: theme.colorScheme.secondary,
-                          ),
-                        ),
-                      ],
                     ),
                   ),
                 ],

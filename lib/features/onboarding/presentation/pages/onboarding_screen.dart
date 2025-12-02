@@ -49,7 +49,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
             Container(
-              height: 130,
+              height: MediaQuery.of(context).size.height * 0.15,
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
@@ -67,7 +67,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
-                      getOnboardPage(context: context).length, // Sayfa sayısı kadar nokta
+                      getOnboardPage(context: context).length + 1, // Sayfa sayısı kadar nokta
                           (index) {
                         return AnimatedContainer(
                           duration: const Duration(milliseconds: 300),
