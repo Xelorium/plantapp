@@ -36,4 +36,11 @@ class AppColors {
   // Paywall Specific
   static const Color paywallBackground = Color(0xFF101E17); // Dark background for paywall
   static const Color paywallCardOverlay = Color(0x4D000000); // Semi-transparent black
+
+  // Dark Theme Colors
+  static const Color backgroundDark = Color(0xFF101E17); // Same as paywall background for consistency
+  static const Color surfaceDark = Color(0xFF1C2923); // Slightly lighter for cards/inputs
+  static const Color textPrimaryDark = Color(0xFFFFFFFF);
+  static const Color textSecondaryDark = Color(0xFFB0B3B8);
+  static const Color textHintDark = Color(0xFF6B7280);
 }
