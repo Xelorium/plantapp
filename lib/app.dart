@@ -7,7 +7,7 @@ class PlantApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(body: Center(child: Text('Hello World!'))),
+      home: const Scaffold(body: Center(child: Text('Hello World!'))),
       theme: ThemeData(fontFamily: AppFonts.primary),
     );
   }
