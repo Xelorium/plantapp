@@ -5,4 +5,4 @@ import 'package:plantapp/core/init/dependency_injection.config.dart';
 final GetIt getIt = GetIt.instance;
 
 @InjectableInit(preferRelativeImports: true)
-void configureDependencies() => getIt.init();
+Future<void> configureDependencies() async => getIt.init();

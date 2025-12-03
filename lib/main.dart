@@ -5,9 +5,9 @@ import 'package:plantapp/core/init/dependency_injection.dart'; // DI dosyanızı
 
 void main() {
   runZonedGuarded(
-    () {
+    () async {
       WidgetsFlutterBinding.ensureInitialized();
-      configureDependencies(); // DI Başlatma
+      await configureDependencies(); // DI Başlatma
       runApp(const PlantApp());
     },
     (error, stackTrace) {
