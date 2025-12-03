@@ -5,8 +5,10 @@ analyzer:
     - lib/**.g.dart # freezed ile üretilen dosyaları hariç tut
     - lib/**.freezed.dart # freezed ile üretilen dosyaları hariç tut
     - test/**.dart
+  errors:
+    invalid_annotation_target: ignore
+
 linter:
   rules:
     public_member_api_docs: false # Dokümantasyon zorunluluğunu kaldır
     lines_longer_than_80_chars: false # 80 karakter sınırını kaldır
-
