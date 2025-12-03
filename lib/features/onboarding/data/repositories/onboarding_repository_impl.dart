@@ -1,5 +1,6 @@
+import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
-import 'package:plantapp/core/error/exceptions.dart';
+import 'package:plantapp/core/error/failures.dart';
 import 'package:plantapp/features/onboarding/domain/repositories/onboarding_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,16 +13,22 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
   static const String _onboardingCompleteKey = 'onboarding_complete';
 
   @override
-  bool isOnboardingComplete() {
-    return _sharedPreferences.getBool(_onboardingCompleteKey) ?? false;
+  Either<Failure, bool> isOnboardingComplete() {
+    try {
+      final result = _sharedPreferences.getBool(_onboardingCompleteKey) ?? false;
+      return Right(result);
+    } catch (e) {
+      return Left(CacheFailure('Onboarding durumu okunamadı: $e'));
+    }
   }
 
   @override
-  Future<void> setOnboardingComplete() async {
+  Future<Either<Failure, void>> setOnboardingComplete() async {
     try {
       await _sharedPreferences.setBool(_onboardingCompleteKey, true);
+      return const Right(null);
     } catch (e) {
-      throw CacheException(message: 'Onboarding durumu kaydedilemedi: $e');
+      return Left(CacheFailure('Onboarding durumu kaydedilemedi: $e'));
     }
   }
 }

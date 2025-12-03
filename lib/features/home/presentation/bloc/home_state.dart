@@ -4,13 +4,14 @@ import 'package:plantapp/features/home/data/models/question_model.dart';
 
 part 'home_state.freezed.dart';
 
+enum HomeStatus { initial, loading, success, failure }
+
 @freezed
-class HomeState with _$HomeState {
-  const factory HomeState.initial() = _Initial;
-  const factory HomeState.loading() = _Loading;
-  const factory HomeState.success({
-    required List<CategoryModel> categories,
-    required List<QuestionModel> questions,
-  }) = _Success;
-  const factory HomeState.error(String message) = _Error;
+abstract class HomeState with _$HomeState {
+  const factory HomeState({
+    @Default(HomeStatus.initial) HomeStatus status,
+    @Default([]) List<CategoryModel> categories,
+    @Default([]) List<QuestionModel> questions,
+    String? errorMessage,
+  }) = _HomeState;
 }
