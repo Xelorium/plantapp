@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:plantapp/core/constants/app_constants.dart';
-import 'package:plantapp/core/theme/app_theme.dart';
-import 'package:plantapp/core/navigation/app_router.dart';
 import 'package:plantapp/core/init/dependency_injection.dart';
+import 'package:plantapp/core/navigation/app_router.dart';
+import 'package:plantapp/core/theme/app_theme.dart';
 
 class PlantApp extends StatelessWidget {
   const PlantApp({super.key});
