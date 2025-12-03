@@ -7,6 +7,6 @@ import 'package:plantapp/core/navigation/app_router.gr.dart';
 class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: GetStartedRoute.page, initial: true),
+    AutoRoute(page: OnboardingRoute.page, initial: true),
   ];
 }

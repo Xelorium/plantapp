@@ -15,6 +15,10 @@ abstract final class AppStrings {
   static const String getStarted = 'Get Started';
 }
 
+abstract final class AppAssets {
+  static const String getStartedBackground = 'assets/images/get_started_bg.png';
+}
+
 abstract final class AppMessages {
   static const String connectionError = 'Please check your internet connection.';
 
