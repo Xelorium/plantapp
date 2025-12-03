@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:plantapp/core/constants/app_constants.dart';
-import 'package:plantapp/core/network/api_service.dart'; // Import eklendi
+import 'package:plantapp/core/network/api_service.dart';
+import 'package:plantapp/core/network/error_interceptor.dart'; // Import eklendi
 
 @module
 abstract class NetworkModule {
@@ -16,6 +17,7 @@ abstract class NetworkModule {
       ),
     );
 
+    dio.interceptors.add(ErrorInterceptor());
     dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
 
     return dio;

@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:plantapp/core/error/exceptions.dart';
 import 'package:plantapp/features/onboarding/domain/repositories/onboarding_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,6 +18,10 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
 
   @override
   Future<void> setOnboardingComplete() async {
-    await _sharedPreferences.setBool(_onboardingCompleteKey, true);
+    try {
+      await _sharedPreferences.setBool(_onboardingCompleteKey, true);
+    } catch (e) {
+      throw CacheException(message: 'Onboarding durumu kaydedilemedi: $e');
+    }
   }
 }
