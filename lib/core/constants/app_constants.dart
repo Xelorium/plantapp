@@ -13,10 +13,13 @@ abstract final class AppUrls {
 abstract final class AppStrings {
   static const String onboardingSubtitle = 'Identify more than 3000+ plants and 88% accuracy.';
   static const String getStarted = 'Get Started';
+  static const String continueText = 'Continue';
 }
 
 abstract final class AppAssets {
   static const String getStartedBackground = 'assets/images/get_started_bg.png';
+  static const String onboardingBackground1 = 'assets/images/onboarding_bg_1.png';
+  static const String onboardingBackground2 = 'assets/images/onboarding_bg_2.png';
 }
 
 abstract final class AppMessages {

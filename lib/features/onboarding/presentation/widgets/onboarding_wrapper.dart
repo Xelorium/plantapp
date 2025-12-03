@@ -24,7 +24,8 @@ class OnboardingWrapper extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: Container(
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
               width: double.infinity,
               padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 22.h),
               decoration: BoxDecoration(

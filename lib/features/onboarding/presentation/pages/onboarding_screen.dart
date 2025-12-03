@@ -8,8 +8,48 @@ import 'package:plantapp/features/onboarding/presentation/widgets/get_started_co
 import 'package:plantapp/features/onboarding/presentation/widgets/onboarding_wrapper.dart';
 
 @RoutePage()
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
+
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  int _currentIndex = 0;
+
+  void _goToNextPage() {
+    if (_currentIndex >= _onboardingComponents.length - 1) return;
+
+    setState(() => _currentIndex++);
+  }
+
+  List<(Widget bodyContent, String backgroundImagePath, String buttonText, VoidCallback onButtonPressed, Widget footerContent)> get _onboardingComponents => [
+    (
+      const GetStartedBodyContent(),
+      AppAssets.getStartedBackground,
+      AppStrings.getStarted,
+      _goToNextPage,
+      GetStartedFooterContent(
+        onPrivacyTap: () {},
+        onTermsTap: () {},
+      ),
+    ),
+    (
+      const GetStartedBodyContent(),
+      AppAssets.onboardingBackground1,
+      AppStrings.continueText,
+      _goToNextPage,
+      const SizedBox(),
+    ),
+    (
+    const GetStartedBodyContent(),
+    AppAssets.onboardingBackground2,
+    AppStrings.continueText,
+    _goToNextPage,
+    const SizedBox(),
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +60,11 @@ class OnboardingScreen extends StatelessWidget {
           listener: (context, state) {},
           builder: (context, state) {
             return OnboardingWrapper(
-              bodyContent: const GetStartedBodyContent(),
-              backgroundImagePath: AppAssets.getStartedBackground,
-              buttonText: AppStrings.getStarted,
-              onButtonPressed: () {},
-              footerContent: GetStartedFooterContent(
-                onPrivacyTap: () {},
-                onTermsTap: () {},
-              ),
+              bodyContent: _onboardingComponents[_currentIndex].$1,
+              backgroundImagePath: _onboardingComponents[_currentIndex].$2,
+              buttonText: _onboardingComponents[_currentIndex].$3,
+              onButtonPressed: _onboardingComponents[_currentIndex].$4,
+              footerContent: _onboardingComponents[_currentIndex].$5,
             );
           },
         ),
