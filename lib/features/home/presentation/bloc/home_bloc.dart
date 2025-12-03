@@ -18,7 +18,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             final results = await Future.wait([
               _repository.getCategories(),
               _repository.getQuestions(),
-            ]);
+            ], eagerError: true);
 
             emit(
               HomeState.success(
