@@ -10,6 +10,11 @@ abstract final class AppUrls {
   static const String apiBaseUrl = 'https://dummy-api-jtg6bessta-ey.a.run.app';
 }
 
+abstract final class AppStrings {
+  static const String onboardingSubtitle = 'Identify more than 3000+ plants and 88% accuracy.';
+  static const String getStarted = 'Get Started';
+}
+
 abstract final class AppMessages {
   static const String connectionError = 'Please check your internet connection.';
 

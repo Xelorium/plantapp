@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/core/constants/app_constants.dart';
 import 'package:plantapp/core/init/dependency_injection.dart';
 import 'package:plantapp/core/navigation/app_router.dart';
@@ -11,12 +12,20 @@ class PlantApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final appRouter = getIt<AppRouter>();
 
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      title: AppConstants.appName,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      routerConfig: appRouter.config(),
+    return ScreenUtilInit(
+      designSize: const Size(360, 800),
+      minTextAdapt: true,
+      ensureScreenSize: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: AppConstants.appName,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          routerConfig: appRouter.config(),
+        );
+      },
     );
   }
 }

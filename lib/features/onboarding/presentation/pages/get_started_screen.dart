@@ -1,7 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:plantapp/core/constants/app_constants.dart';
 import 'package:plantapp/core/init/dependency_injection.dart';
+import 'package:plantapp/core/theme/app_colors.dart';
 import 'package:plantapp/features/onboarding/presentation/cubit/onboarding_cubit.dart';
 
 @RoutePage()
@@ -10,93 +14,130 @@ class GetStartedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Responsive scale factor
-    double s = MediaQuery.of(context).size.width / 375.0;
-
     return BlocProvider(
       create: (context) => getIt<OnboardingCubit>(),
       child: Scaffold(
         body: BlocConsumer<OnboardingCubit, OnboardingState>(
-          listener: (context, state) {
-            state.mapOrNull(
-              completed: (_) {
-                // TODO: Home sayfasına yönlendir
-                // context.router.replace(const HomeRoute());
-              },
-              error: (state) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(state.message)),
-                );
-              },
-            );
-          },
+          listener: (context, state) {},
           builder: (context, state) {
-            return Stack(
-              children: [
-                // Arkaplan Görseli
-                Positioned.fill(
-                  child: Image.asset(
-                    'assets/images/onboarding_bg.png', // Görselin yolu
-                    fit: BoxFit.cover,
-                  ),
-                ),
-
-                // İçerik
-                SafeArea(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24.0 * s),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 20 * s),
-                        Text(
-                          'Welcome to\nPlantApp',
-                          style: TextStyle(
-                            fontSize: 28 * s,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black, // AppColors.black
-                          ),
+            return SafeArea(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 22.h),
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/get_started_bg.png'),
+                          fit: BoxFit.fitHeight,
                         ),
-                        SizedBox(height: 10 * s),
-                        Text(
-                          'Identify more than 3000+ plants and 88% accuracy.',
-                          style: TextStyle(
-                            fontSize: 16 * s,
-                            color: Colors.black54,
-                          ),
-                        ),
-                        const Spacer(),
-
-                        // Buton
-                        SizedBox(
-                          width: double.infinity,
-                          height: 56 * s,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              context.read<OnboardingCubit>().setOnboardingComplete();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.green, // AppColors.primary
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12 * s),
+                      ),
+                      child: SizedBox(
+                        height: .2.sh,
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AutoSizeText.rich(
+                              textScaleFactor: 1,
+                              style: TextStyle(fontSize: 28.sp, fontWeight: FontWeight.bold),
+                              minFontSize: 8,
+                              overflow: TextOverflow.ellipsis,
+                              const TextSpan(
+                                text: 'Welcome to ',
+                                style: TextStyle(color: AppColors.secondary, fontWeight: FontWeight.w400),
+                                children: [
+                                  TextSpan(
+                                    text: AppConstants.appName,
+                                    style: TextStyle(fontWeight: FontWeight.w600),
+                                  ),
+                                ],
                               ),
+                              maxLines: 1,
+                              textAlign: TextAlign.start,
                             ),
-                            child: Text(
-                              'Get Started',
-                              style: TextStyle(
-                                fontSize: 16 * s,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
+                            SizedBox(height: 8.h),
+                            AutoSizeText(
+                              AppStrings.onboardingSubtitle,
+                              textScaleFactor: 1,
+                              style: TextStyle(fontSize: 16.sp),
+                              minFontSize: 8,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              textAlign: TextAlign.start,
                             ),
-                          ),
+                          ],
                         ),
-                        SizedBox(height: 40 * s),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: .16.sh,
+                    width: double.infinity,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: 20.w,
+                        right: 20.w,
+                        bottom: 4.h,
+                      ),
+                      child: Column(
+                        children: [
+                          FilledButton(
+                            onPressed: () {},
+                            style: ButtonStyle(
+                              fixedSize: WidgetStatePropertyAll(
+                                Size(double.infinity, 56.h),
+                              ),
+                            ),
+                            child: AutoSizeText(
+                              AppStrings.getStarted,
+                              style: TextStyle(fontSize: 16.sp),
+                            ),
+                          ),
+                          SizedBox(height: 16.h),
+                          Flexible(
+                            child: AutoSizeText.rich(
+                              style: TextStyle(fontSize: 11.sp),
+                              minFontSize: 4,
+                              overflow: TextOverflow.ellipsis,
+                              const TextSpan(
+                                text: 'By tapping next, you are agreeing to PlantID\n',
+                                children: [
+                                  TextSpan(
+                                    text: 'Terms of Use',
+                                    style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      decorationStyle: TextDecorationStyle.solid,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: ' & ',
+                                    style: TextStyle(decoration: TextDecoration.none),
+                                  ),
+                                  TextSpan(
+                                    text: 'Privacy Policy',
+                                    style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      decorationStyle: TextDecorationStyle.solid,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: '.',
+                                    style: TextStyle(decoration: TextDecoration.none),
+                                  ),
+                                ],
+                              ),
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             );
           },
         ),
