@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:plantapp/features/home/data/models/categories_response.dart';
+import 'package:plantapp/features/home/data/models/question_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'api_service.g.dart';
@@ -8,8 +10,8 @@ abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
   @GET('/getCategories')
-  Future<dynamic> getCategories();
+  Future<CategoriesResponse> getCategories();
 
   @GET('/getQuestions')
-  Future<dynamic> getQuestions();
+  Future<List<QuestionModel>> getQuestions();
 }
