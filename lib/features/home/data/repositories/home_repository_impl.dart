@@ -1,5 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
+import 'package:plantapp/core/constants/app_constants.dart';
 import 'package:plantapp/core/error/exceptions.dart';
 import 'package:plantapp/core/error/failures.dart';
 import 'package:plantapp/core/network/api_service.dart';
@@ -23,7 +24,7 @@ class HomeRepositoryImpl implements HomeRepository {
     } on NetworkException catch (e) {
       return Left(NetworkFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('Beklenmedik bir hata: $e'));
+      return Left(ServerFailure('${AppMessages.unexpectedError}: $e'));
     }
   }
 
@@ -37,7 +38,7 @@ class HomeRepositoryImpl implements HomeRepository {
     } on NetworkException catch (e) {
       return Left(NetworkFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('Beklenmedik bir hata: $e'));
+      return Left(ServerFailure('${AppMessages.unexpectedError}: $e'));
     }
   }
 }

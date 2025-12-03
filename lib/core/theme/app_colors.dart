@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // Primary Brand Colors
-  /// The main green used for Buttons, Active States, and Highlights.
-  /// Extracted from the "Continue" and "Try free for 3 days" buttons.
   static const Color primary = Color(0xFF28AF6E);
   static const Color onPrimary = Colors.white;
   
   // Secondary / Text Colors
-  /// Used for main headlines (e.g., "Welcome to PlantApp").
-  /// A very dark, almost black, jungle green.
   static const Color secondary = Color(0xFF13231B);
   static const Color onSecondary = Colors.white;
 

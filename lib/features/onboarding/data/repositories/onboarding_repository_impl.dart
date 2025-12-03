@@ -1,5 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
+import 'package:plantapp/core/constants/app_constants.dart';
 import 'package:plantapp/core/error/failures.dart';
 import 'package:plantapp/features/onboarding/domain/repositories/onboarding_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,7 +19,7 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
       final result = _sharedPreferences.getBool(_onboardingCompleteKey) ?? false;
       return Right(result);
     } catch (e) {
-      return Left(CacheFailure('Onboarding durumu okunamadı: $e'));
+      return Left(CacheFailure('${AppMessages.onboardingReadError}$e'));
     }
   }
 
@@ -28,7 +29,7 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
       await _sharedPreferences.setBool(_onboardingCompleteKey, true);
       return const Right(null);
     } catch (e) {
-      return Left(CacheFailure('Onboarding durumu kaydedilemedi: $e'));
+      return Left(CacheFailure('${AppMessages.onboardingSaveError}$e'));
     }
   }
 }

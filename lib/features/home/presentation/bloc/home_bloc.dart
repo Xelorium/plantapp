@@ -36,7 +36,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           );
 
           questionsResult.fold(
-            (failure) => errorMsg = failure.message, // Varsa önceki hatayı ezer veya birleştirebilirsiniz
+            (failure) => errorMsg = failure.message,
             (data) => currentQuestions = data,
           );
 

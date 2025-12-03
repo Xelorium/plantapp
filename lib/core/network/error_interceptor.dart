@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:plantapp/core/constants/app_constants.dart'; // Import
 import 'package:plantapp/core/error/exceptions.dart';
 
 class ErrorInterceptor extends Interceptor {
@@ -9,22 +10,22 @@ class ErrorInterceptor extends Interceptor {
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
       case DioExceptionType.connectionError:
-        throw NetworkException(message: 'Bağlantı zaman aşımına uğradı veya internet yok.');
+        throw NetworkException(message: AppMessages.timeoutError);
 
       case DioExceptionType.badResponse:
         throw ServerException(
-          message: err.response?.statusMessage ?? 'Sunucu hatası oluştu.',
+          message: err.response?.statusMessage ?? AppMessages.serverError,
           statusCode: err.response?.statusCode,
         );
 
       case DioExceptionType.cancel:
-        throw NetworkException(message: 'İstek iptal edildi.');
-
-      case DioExceptionType.unknown:
-        throw NetworkException(message: 'Bilinmeyen bir ağ hatası oluştu.');
+        throw NetworkException(message: AppMessages.requestCancelled);
 
       case DioExceptionType.badCertificate:
-        throw NetworkException(message: 'Geçersiz sertifika hatası oluştu.');
+        throw NetworkException(message: AppMessages.invalidCertificateError);
+
+      default:
+        throw ServerException(message: '${AppMessages.unknownNetworkError}: ${err.message}');
     }
   }
 }
