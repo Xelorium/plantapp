@@ -87,6 +87,7 @@ class PaywallSubscriptionCard extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           AnimatedContainer(
+            transformAlignment: Alignment.topLeft,
             duration: const Duration(milliseconds: 300),
             padding: EdgeInsets.all(14.sp),
             decoration: BoxDecoration(
@@ -96,8 +97,8 @@ class PaywallSubscriptionCard extends StatelessWidget {
             ),
             child: Row(
               children: [
-                // Radio Button Icon
-                Container(
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
                   width: 24.sp,
                   height: 24.sp,
                   decoration: BoxDecoration(

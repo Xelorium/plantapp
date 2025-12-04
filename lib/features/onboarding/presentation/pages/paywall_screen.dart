@@ -7,9 +7,50 @@ import 'package:plantapp/core/constants/app_constants.dart';
 import 'package:plantapp/core/theme/app_colors.dart';
 import 'package:plantapp/features/onboarding/presentation/widgets/paywall_components.dart';
 
+class SubscriptionPlan {
+  const SubscriptionPlan({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    this.badgeText,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final String? badgeText;
+}
+
 @RoutePage()
-class PaywallScreen extends StatelessWidget {
+class PaywallScreen extends StatefulWidget {
   const PaywallScreen({super.key});
+
+  @override
+  State<PaywallScreen> createState() => _PaywallScreenState();
+}
+
+class _PaywallScreenState extends State<PaywallScreen> {
+  String? selectedPlanId;
+
+  List<SubscriptionPlan> get subscriptionPlans => [
+    const SubscriptionPlan(
+      id: 'monthly',
+      title: '1 Month',
+      subtitle: r'$32.99 per month, auto renewable',
+    ),
+    const SubscriptionPlan(
+      id: 'yearly',
+      title: '1 Year',
+      subtitle: r'First 3 days free, then $529,99/year',
+      badgeText: 'Save 50%',
+    ),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    selectedPlanId = subscriptionPlans.isNotEmpty ? subscriptionPlans.first.id : null;
+  }
 
   List<(String iconPath, String title, String subtitle)> get features => [
     // MB TODO: STRINGIFY
@@ -43,23 +84,25 @@ class PaywallScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: Align(
-                            alignment: Alignment.topRight,
-                            child: IconButton(
-                              padding: EdgeInsets.zero,
-                              visualDensity: VisualDensity.compact,
-                              icon: Container(
-                                padding: EdgeInsets.all(6.sp),
-                                decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.black45),
-                                child: Icon(
-                                  Icons.close,
-                                  color: AppColors.onPrimary,
-                                  size: 18.sp,
+                          child: SafeArea(
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: IconButton(
+                                padding: EdgeInsets.zero,
+                                visualDensity: VisualDensity.compact,
+                                icon: Container(
+                                  padding: EdgeInsets.all(6.sp),
+                                  decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.black45),
+                                  child: Icon(
+                                    Icons.close,
+                                    color: AppColors.onPrimary,
+                                    size: 18.sp,
+                                  ),
                                 ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
                               ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
                             ),
                           ),
                         ),
@@ -115,27 +158,28 @@ class PaywallScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 24.sp),
-
-                        PaywallSubscriptionCard(
-                          title: '1 Month',
-                          subtitle: r'$32.99 per month, auto renewable',
-                          isSelected: false,
-                          onTap: () {},
-                        ),
-                        SizedBox(height: 16.sp),
-                        PaywallSubscriptionCard(
-                          title: '1 Year',
-                          subtitle: r'First 3 days free, then $529,99/year',
-                          isSelected: true,
-                          badgeText: 'Save 50%',
-                          onTap: () {},
+                        ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.zero,
+                          itemCount: subscriptionPlans.length,
+                          separatorBuilder: (context, index) => SizedBox(height: 16.sp),
+                          itemBuilder: (context, index) {
+                            final plan = subscriptionPlans[index];
+                            return PaywallSubscriptionCard(
+                              title: plan.title,
+                              subtitle: plan.subtitle,
+                              isSelected: selectedPlanId == plan.id,
+                              badgeText: plan.badgeText,
+                              onTap: () => setState(() => selectedPlanId = plan.id),
+                            );
+                          },
                         ),
                       ],
                     ),
                   ),
                 ),
                 _Footer(
-                  key: key,
                   onTryButtonPressed: () {},
                   onPrivacyPressed: () {},
                   onRestorePressed: () {},
@@ -152,7 +196,6 @@ class PaywallScreen extends StatelessWidget {
 
 class _Footer extends StatelessWidget {
   const _Footer({
-    super.key,
     this.onPrivacyPressed,
     this.onRestorePressed,
     this.onTermsPressed,

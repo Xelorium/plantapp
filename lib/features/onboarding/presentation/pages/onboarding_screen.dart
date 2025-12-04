@@ -1,12 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/core/constants/app_constants.dart';
-import 'package:plantapp/core/init/dependency_injection.dart';
 import 'package:plantapp/core/navigation/app_router.gr.dart';
-import 'package:plantapp/features/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:plantapp/features/onboarding/presentation/widgets/get_started_components.dart';
 import 'package:plantapp/features/onboarding/presentation/widgets/onboarding_components.dart';
 import 'package:plantapp/features/onboarding/presentation/widgets/onboarding_wrapper.dart';
@@ -48,7 +45,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int _onboardingPageIndex = 0;
 
   List<Widget> get _onboardingPages => [
-    // Sayfa 1: Identify
     Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -110,7 +106,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         ),
       ],
     ),
-    // Sayfa 2: Care Guides
     Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -200,21 +195,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<OnboardingCubit>(),
-      child: Scaffold(
-        body: BlocConsumer<OnboardingCubit, OnboardingState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            return OnboardingWrapper(
-              bodyContent: _onboardingComponents[_currentIndex].$1,
-              backgroundImagePath: _onboardingComponents[_currentIndex].$2,
-              buttonText: _onboardingComponents[_currentIndex].$3,
-              onButtonPressed: _onboardingComponents[_currentIndex].$4,
-              footerContent: _onboardingComponents[_currentIndex].$5,
-            );
-          },
-        ),
+    return Scaffold(
+      body: OnboardingWrapper(
+        bodyContent: _onboardingComponents[_currentIndex].$1,
+        backgroundImagePath: _onboardingComponents[_currentIndex].$2,
+        buttonText: _onboardingComponents[_currentIndex].$3,
+        onButtonPressed: _onboardingComponents[_currentIndex].$4,
+        footerContent: _onboardingComponents[_currentIndex].$5,
       ),
     );
   }
