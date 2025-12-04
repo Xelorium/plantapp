@@ -24,62 +24,130 @@ class PaywallScreen extends StatelessWidget {
               ),
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Expanded(child: SizedBox()),
-                SizedBox(
-                  height: .16.sh,
-                  width: double.infinity,
+                Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 4.h),
+                    padding: EdgeInsets.only(left: 20.w, top: 60.h, right: 20.w, bottom: 24.h),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        FilledButton(
-                          onPressed: () {},
-                          style: ButtonStyle(
-                            fixedSize: WidgetStatePropertyAll(Size(double.infinity, 56.h)),
-                          ),
-                          child: AutoSizeText('Try for 3 days', style: TextStyle(fontSize: 16.sp)),
-                        ),
-                        SizedBox(height: 8.h),
-                        const Expanded(
-                          child: Column(
+                        // <b>PlantApp</b> Premium
+                        AutoSizeText.rich(
+                          const TextSpan(
+                            text: 'PlantApp ',
+                            style: TextStyle(),
                             children: [
-                              Expanded(
-                                child: AutoSizeText(
-                                  'After the 3-day free trial period you’ll be charged ₺274.99 per year unless you cancel\nbefore the trial expires. Yearly Subscription is Auto-Renewable',
-                                  textAlign: TextAlign.center,
-                                  maxLines: 2,
-                                  minFontSize: 2,
-                                  maxFontSize: 9,
-                                ),
-                              ),
-                              Expanded(
-                                child: AutoSizeText.rich(
-                                  TextSpan(
-                                    text: 'Terms',
-                                    children: [
-                                      TextSpan(text: '  •  '),
-                                      TextSpan(text: 'Privacy'),
-                                      TextSpan(text: '  •  '),
-                                      TextSpan(text: 'Restore'),
-                                    ],
-                                  ),
-                                  textAlign: TextAlign.center,
-                                  maxLines: 1,
-                                  minFontSize: 2,
-                                  maxFontSize: 11,
-                                ),
+                              TextSpan(
+                                text: 'Premium',
+                                style: TextStyle(fontWeight: FontWeight.w300),
                               ),
                             ],
                           ),
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontSize: 27.sp,
+                            color: AppColors.onPrimary,
+                            fontWeight: FontWeight.w900,
+                          ),
                         ),
+
+                        // Access All Features
+                        AutoSizeText(
+                          'Access All Features',
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontSize: 17.sp,
+                            color: AppColors.onPrimary.withValues(alpha: .7),
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                        SizedBox(height: 24.h),
                       ],
                     ),
                   ),
                 ),
+                _Footer(
+                  key: key,
+                  onTryButtonPressed: () {},
+                  onPrivacyPressed: () {},
+                  onRestorePressed: () {},
+                  onTermsPressed: () {},
+                ),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Footer extends StatelessWidget {
+  const _Footer({
+    super.key,
+    this.onPrivacyPressed,
+    this.onRestorePressed,
+    this.onTermsPressed,
+    this.onTryButtonPressed,
+  });
+
+  final VoidCallback? onTryButtonPressed;
+  final VoidCallback? onTermsPressed;
+  final VoidCallback? onPrivacyPressed;
+  final VoidCallback? onRestorePressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: .16.sh,
+      width: double.infinity,
+      child: Padding(
+        padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 4.h),
+        child: Column(
+          children: [
+            FilledButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                fixedSize: WidgetStatePropertyAll(Size(double.infinity, 56.h)),
+              ),
+              child: AutoSizeText('Try for 3 days', style: TextStyle(fontSize: 16.sp)),
+            ),
+            SizedBox(height: 8.h),
+            const Expanded(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: AutoSizeText(
+                      'After the 3-day free trial period you’ll be charged ₺274.99 per year unless you cancel\nbefore the trial expires. Yearly Subscription is Auto-Renewable',
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      minFontSize: 2,
+                      maxFontSize: 9,
+                    ),
+                  ),
+                  Expanded(
+                    child: AutoSizeText.rich(
+                      TextSpan(
+                        text: 'Terms',
+                        children: [
+                          TextSpan(text: '  •  '),
+                          TextSpan(text: 'Privacy'),
+                          TextSpan(text: '  •  '),
+                          TextSpan(text: 'Restore'),
+                        ],
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                      minFontSize: 2,
+                      maxFontSize: 11,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
