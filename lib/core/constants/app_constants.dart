@@ -22,6 +22,9 @@ abstract final class AppAssets {
   static const String onboardingBackground2 = 'assets/images/onboarding_bg_2.png';
   static const String paywallBackground = 'assets/images/paywall_bg.png';
   static const String brushLine = 'assets/images/brush_line.png';
+
+  static const String scannerFeatureIconSvg = 'assets/icons/scanner_feature_icon.svg';
+  static const String speedFeatureIconSvg = 'assets/icons/speed_feature_icon.svg';
 }
 
 abstract final class AppMessages {

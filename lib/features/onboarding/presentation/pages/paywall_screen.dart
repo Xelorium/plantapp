@@ -1,13 +1,22 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/core/constants/app_constants.dart';
 import 'package:plantapp/core/theme/app_colors.dart';
+import 'package:plantapp/features/onboarding/presentation/widgets/paywall_components.dart';
 
 @RoutePage()
 class PaywallScreen extends StatelessWidget {
   const PaywallScreen({super.key});
+
+  List<(String iconPath, String title, String subtitle)> get features => [
+    // MB TODO: STRINGIFY
+    (AppAssets.scannerFeatureIconSvg, 'Unlimited', 'Plant Identify'),
+    (AppAssets.speedFeatureIconSvg, 'Faster', 'Process'),
+    (AppAssets.speedFeatureIconSvg, 'Detailed', 'Plant care'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +42,13 @@ class PaywallScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // <b>PlantApp</b> Premium
                         AutoSizeText.rich(
                           const TextSpan(
-                            text: 'PlantApp ',
-                            style: TextStyle(),
+                            text: AppConstants.appName,
                             children: [
                               TextSpan(
-                                text: 'Premium',
+                                // MB TODO: STRINGIFY
+                                text: ' Premium',
                                 style: TextStyle(fontWeight: FontWeight.w300),
                               ),
                             ],
@@ -53,8 +61,8 @@ class PaywallScreen extends StatelessWidget {
                           ),
                         ),
 
-                        // Access All Features
                         AutoSizeText(
+                          // MB TODO: STRINGIFY
                           'Access All Features',
                           maxLines: 1,
                           style: TextStyle(
@@ -64,6 +72,25 @@ class PaywallScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 24.h),
+
+                        SizedBox(
+                          height: 124.sp,
+                          child: ListView.separated(
+                            clipBehavior: Clip.none,
+                            itemBuilder: (context, index) {
+                              final feature = features[index];
+
+                              return PaywallFeatureCard(
+                                iconPath: feature.$1,
+                                title: feature.$2,
+                                subtitle: feature.$3,
+                              );
+                            },
+                            separatorBuilder: (context, index) => SizedBox(width: 8.w),
+                            itemCount: features.length,
+                            scrollDirection: Axis.horizontal,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -108,18 +135,20 @@ class _Footer extends StatelessWidget {
         child: Column(
           children: [
             FilledButton(
-              onPressed: () {},
+              onPressed: onTryButtonPressed,
               style: ButtonStyle(
                 fixedSize: WidgetStatePropertyAll(Size(double.infinity, 56.h)),
               ),
+              // MB TODO: STRINGIFY
               child: AutoSizeText('Try for 3 days', style: TextStyle(fontSize: 16.sp)),
             ),
             SizedBox(height: 8.h),
-            const Expanded(
+            Expanded(
               child: Column(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: AutoSizeText(
+                      // MB TODO: STRINGIFY
                       'After the 3-day free trial period you’ll be charged ₺274.99 per year unless you cancel\nbefore the trial expires. Yearly Subscription is Auto-Renewable',
                       textAlign: TextAlign.center,
                       maxLines: 2,
@@ -130,12 +159,17 @@ class _Footer extends StatelessWidget {
                   Expanded(
                     child: AutoSizeText.rich(
                       TextSpan(
+                        // MB TODO: STRINGIFY
                         text: 'Terms',
+                        recognizer: TapGestureRecognizer()..onTap = onTermsPressed,
                         children: [
-                          TextSpan(text: '  •  '),
-                          TextSpan(text: 'Privacy'),
-                          TextSpan(text: '  •  '),
-                          TextSpan(text: 'Restore'),
+                          const TextSpan(text: '  •  '),
+                          // MB TODO: STRINGIFY
+                          TextSpan(text: 'Privacy', recognizer: TapGestureRecognizer()..onTap = onPrivacyPressed),
+                          // MB TODO: STRINGIFY
+                          const TextSpan(text: '  •  '),
+                          // MB TODO: STRINGIFY
+                          TextSpan(text: 'Restore', recognizer: TapGestureRecognizer()..onTap = onRestorePressed),
                         ],
                       ),
                       textAlign: TextAlign.center,
