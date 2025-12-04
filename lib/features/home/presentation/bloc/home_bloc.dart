@@ -21,7 +21,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           final results = await Future.wait([
             _getCategoriesUseCase(),
             _getQuestionsUseCase(),
-          ]);
+          ], eagerError: true);
 
           final categoriesResult = results[0] as Either<Failure, List<CategoryModel>>;
           final questionsResult = results[1] as Either<Failure, List<QuestionModel>>;

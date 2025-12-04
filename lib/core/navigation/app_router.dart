@@ -5,9 +5,19 @@ import 'package:plantapp/core/navigation/app_router.gr.dart';
 @singleton
 @AutoRouterConfig()
 class AppRouter extends RootStackRouter {
+
+
+
   @override
   List<AutoRoute> get routes => [
     AutoRoute(page: OnboardingRoute.page, initial: true),
-    AutoRoute(page: PaywallRoute.page),
+    CustomRoute<void>(
+      page: PaywallRoute.page,
+      transitionsBuilder: TransitionsBuilders.slideBottom,
+      fullscreenDialog: true,
+      predictiveBackPageTransitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return TransitionsBuilders.slideBottom(context, animation, secondaryAnimation, child);
+      },
+    ),
   ];
 }

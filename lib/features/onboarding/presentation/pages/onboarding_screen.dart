@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/core/constants/app_constants.dart';
 import 'package:plantapp/core/init/dependency_injection.dart';
+import 'package:plantapp/core/navigation/app_router.gr.dart';
 import 'package:plantapp/features/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:plantapp/features/onboarding/presentation/widgets/get_started_components.dart';
 import 'package:plantapp/features/onboarding/presentation/widgets/onboarding_components.dart';
@@ -22,7 +23,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int _currentIndex = 0;
 
   void _goToNextPage() {
-    if (_currentIndex >= _onboardingComponents.length - 1) return;
+    if (_currentIndex >= _onboardingComponents.length - 1) {
+      context.router.push(const PaywallRoute());
+      return;
+    }
 
     setState(() => _currentIndex++);
   }
