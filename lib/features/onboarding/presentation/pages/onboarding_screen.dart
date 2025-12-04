@@ -5,6 +5,7 @@ import 'package:plantapp/core/constants/app_constants.dart';
 import 'package:plantapp/core/init/dependency_injection.dart';
 import 'package:plantapp/features/onboarding/presentation/cubit/onboarding_cubit.dart';
 import 'package:plantapp/features/onboarding/presentation/widgets/get_started_components.dart';
+import 'package:plantapp/features/onboarding/presentation/widgets/onboarding_components.dart';
 import 'package:plantapp/features/onboarding/presentation/widgets/onboarding_wrapper.dart';
 
 @RoutePage()
@@ -24,6 +25,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     setState(() => _currentIndex++);
   }
 
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    _pageController = PageController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   List<(Widget bodyContent, String backgroundImagePath, String buttonText, VoidCallback onButtonPressed, Widget footerContent)> get _onboardingComponents => [
     (
       const GetStartedBodyContent(),
@@ -36,18 +51,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
     ),
     (
-      const GetStartedBodyContent(),
+      OnboardingBodyContent(pageController: _pageController),
       AppAssets.onboardingBackground1,
       AppStrings.continueText,
-      _goToNextPage,
-      const SizedBox(),
-    ),
-    (
-    const GetStartedBodyContent(),
-    AppAssets.onboardingBackground2,
-    AppStrings.continueText,
-    _goToNextPage,
-    const SizedBox(),
+      () {},
+      const OnboardingFooterContent(),
     ),
   ];
 

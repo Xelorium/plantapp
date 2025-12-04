@@ -21,41 +21,48 @@ class OnboardingWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
+      child: Stack(
         children: [
-          Expanded(
+          Positioned.fill(
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              width: double.infinity,
-              padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 22.h),
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(backgroundImagePath),
                   fit: BoxFit.fitHeight,
                 ),
               ),
-              child: bodyContent,
             ),
           ),
-          SizedBox(
-            height: .16.sh,
-            width: double.infinity,
-            child: Padding(
-              padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 4.h),
-              child: Column(
-                children: [
-                  FilledButton(
-                    onPressed: onButtonPressed,
-                    style: ButtonStyle(
-                      fixedSize: WidgetStatePropertyAll(Size(double.infinity, 56.h)),
-                    ),
-                    child: AutoSizeText(buttonText, style: TextStyle(fontSize: 16.sp)),
-                  ),
-                  SizedBox(height: 16.h),
-                  footerContent,
-                ],
+          Column(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 22.h),
+                  child: bodyContent,
+                ),
               ),
-            ),
+              SizedBox(
+                height: .16.sh,
+                width: double.infinity,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 4.h),
+                  child: Column(
+                    children: [
+                      FilledButton(
+                        onPressed: onButtonPressed,
+                        style: ButtonStyle(
+                          fixedSize: WidgetStatePropertyAll(Size(double.infinity, 56.h)),
+                        ),
+                        child: AutoSizeText(buttonText, style: TextStyle(fontSize: 16.sp)),
+                      ),
+                      SizedBox(height: 16.h),
+                      footerContent,
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
