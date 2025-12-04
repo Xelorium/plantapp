@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/core/constants/app_constants.dart';
 import 'package:plantapp/core/navigation/app_router.gr.dart';
+import 'package:plantapp/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:plantapp/features/onboarding/presentation/widgets/get_started_components.dart';
 import 'package:plantapp/features/onboarding/presentation/widgets/onboarding_components.dart';
 import 'package:plantapp/features/onboarding/presentation/widgets/onboarding_wrapper.dart';
@@ -17,15 +19,8 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  int _currentIndex = 0;
-
   void _goToNextPage() {
-    if (_currentIndex >= _onboardingComponents.length - 1) {
-      context.router.push(const PaywallRoute());
-      return;
-    }
-
-    setState(() => _currentIndex++);
+    context.read<OnboardingBloc>().add(const OnboardingEvent.goToNextPage());
   }
 
   late PageController _pageController;
@@ -42,7 +37,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     super.dispose();
   }
 
-  int _onboardingPageIndex = 0;
 
   List<Widget> get _onboardingPages => [
     Column(
@@ -154,7 +148,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     ),
   ];
 
-  List<(Widget bodyContent, String backgroundImagePath, String buttonText, VoidCallback onButtonPressed, Widget footerContent)> get _onboardingComponents => [
+  List<(Widget bodyContent, String backgroundImagePath, String buttonText, VoidCallback onButtonPressed, Widget footerContent)> _buildOnboardingComponents(int onboardingPageIndex) => [
     (
       const GetStartedBodyContent(),
       AppAssets.getStartedBackground,
@@ -168,21 +162,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     (
       OnboardingBodyContent(
         pageController: _pageController,
-        onPageChanged: (index) => setState(() => _onboardingPageIndex = index),
+        onPageChanged: (index) => context.read<OnboardingBloc>().add(OnboardingEvent.onboardingPageChanged(index)),
         pages: _onboardingPages,
       ),
-      _onboardingPageIndex == 0 ? AppAssets.onboardingBackground1 : AppAssets.onboardingBackground2,
+      onboardingPageIndex == 0 ? AppAssets.onboardingBackground1 : AppAssets.onboardingBackground2,
       AppStrings.continueText,
-      _handleOnboardingButtonPress,
+      () => _handleOnboardingButtonPress(onboardingPageIndex),
       OnboardingFooterContent(
-        currentIndex: _onboardingPageIndex,
+        currentIndex: onboardingPageIndex,
         pageCount: _onboardingPages.length + 1,
       ),
     ),
   ];
 
-  void _handleOnboardingButtonPress() {
-    if (_onboardingPageIndex == _onboardingPages.length - 1) {
+  void _handleOnboardingButtonPress(int currentPageIndex) {
+    if (currentPageIndex == _onboardingPages.length - 1) {
       _goToNextPage();
       return;
     }
@@ -195,13 +189,30 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: OnboardingWrapper(
-        bodyContent: _onboardingComponents[_currentIndex].$1,
-        backgroundImagePath: _onboardingComponents[_currentIndex].$2,
-        buttonText: _onboardingComponents[_currentIndex].$3,
-        onButtonPressed: _onboardingComponents[_currentIndex].$4,
-        footerContent: _onboardingComponents[_currentIndex].$5,
+    return BlocListener<OnboardingBloc, OnboardingState>(
+      listenWhen: (previous, current) {
+        // Only listen when transitioning TO paywall (screen index 2)
+        // but not when already on paywall and state changes
+        return previous.currentScreenIndex != 2 && current.currentScreenIndex == 2;
+      },
+      listener: (context, state) {
+        context.router.push(const PaywallRoute());
+      },
+      child: BlocBuilder<OnboardingBloc, OnboardingState>(
+        builder: (context, state) {
+          final components = _buildOnboardingComponents(state.onboardingPageIndex);
+          final currentScreenIndex = state.currentScreenIndex.clamp(0, components.length - 1);
+          
+          return Scaffold(
+            body: OnboardingWrapper(
+              bodyContent: components[currentScreenIndex].$1,
+              backgroundImagePath: components[currentScreenIndex].$2,
+              buttonText: components[currentScreenIndex].$3,
+              onButtonPressed: components[currentScreenIndex].$4,
+              footerContent: components[currentScreenIndex].$5,
+            ),
+          );
+        },
       ),
     );
   }

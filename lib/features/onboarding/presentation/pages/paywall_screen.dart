@@ -2,55 +2,17 @@ import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/core/constants/app_constants.dart';
 import 'package:plantapp/core/theme/app_colors.dart';
+import 'package:plantapp/features/onboarding/domain/models/subscription_plan.dart';
+import 'package:plantapp/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:plantapp/features/onboarding/presentation/widgets/paywall_components.dart';
 
-class SubscriptionPlan {
-  const SubscriptionPlan({
-    required this.id,
-    required this.title,
-    required this.subtitle,
-    this.badgeText,
-  });
-
-  final String id;
-  final String title;
-  final String subtitle;
-  final String? badgeText;
-}
-
 @RoutePage()
-class PaywallScreen extends StatefulWidget {
+class PaywallScreen extends StatelessWidget {
   const PaywallScreen({super.key});
-
-  @override
-  State<PaywallScreen> createState() => _PaywallScreenState();
-}
-
-class _PaywallScreenState extends State<PaywallScreen> {
-  String? selectedPlanId;
-
-  List<SubscriptionPlan> get subscriptionPlans => [
-    const SubscriptionPlan(
-      id: 'monthly',
-      title: '1 Month',
-      subtitle: r'$32.99 per month, auto renewable',
-    ),
-    const SubscriptionPlan(
-      id: 'yearly',
-      title: '1 Year',
-      subtitle: r'First 3 days free, then $529,99/year',
-      badgeText: 'Save 50%',
-    ),
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    selectedPlanId = subscriptionPlans.isNotEmpty ? subscriptionPlans.first.id : null;
-  }
 
   List<(String iconPath, String title, String subtitle)> get features => [
     // MB TODO: STRINGIFY
@@ -100,6 +62,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                                   ),
                                 ),
                                 onPressed: () {
+                                  context.read<OnboardingBloc>().add(const OnboardingEvent.closePaywall());
                                   Navigator.of(context).pop();
                                 },
                               ),
@@ -158,20 +121,26 @@ class _PaywallScreenState extends State<PaywallScreen> {
                           ),
                         ),
                         SizedBox(height: 24.sp),
-                        ListView.separated(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          padding: EdgeInsets.zero,
-                          itemCount: subscriptionPlans.length,
-                          separatorBuilder: (context, index) => SizedBox(height: 16.sp),
-                          itemBuilder: (context, index) {
-                            final plan = subscriptionPlans[index];
-                            return PaywallSubscriptionCard(
-                              title: plan.title,
-                              subtitle: plan.subtitle,
-                              isSelected: selectedPlanId == plan.id,
-                              badgeText: plan.badgeText,
-                              onTap: () => setState(() => selectedPlanId = plan.id),
+                        BlocBuilder<OnboardingBloc, OnboardingState>(
+                          builder: (context, state) {
+                            return ListView.separated(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
+                              itemCount: SubscriptionPlan.availablePlans.length,
+                              separatorBuilder: (context, index) => SizedBox(height: 16.sp),
+                              itemBuilder: (context, index) {
+                                final plan = SubscriptionPlan.availablePlans[index];
+                                return PaywallSubscriptionCard(
+                                  title: plan.title,
+                                  subtitle: plan.subtitle,
+                                  isSelected: state.selectedSubscriptionPlanId == plan.id,
+                                  badgeText: plan.badgeText,
+                                  onTap: () => context.read<OnboardingBloc>().add(
+                                    OnboardingEvent.selectSubscriptionPlan(plan.id),
+                                  ),
+                                );
+                              },
                             );
                           },
                         ),
@@ -180,7 +149,9 @@ class _PaywallScreenState extends State<PaywallScreen> {
                   ),
                 ),
                 _Footer(
-                  onTryButtonPressed: () {},
+                  onTryButtonPressed: () {
+                    context.read<OnboardingBloc>().add(const OnboardingEvent.completeOnboarding());
+                  },
                   onPrivacyPressed: () {},
                   onRestorePressed: () {},
                   onTermsPressed: () {},
