@@ -20,6 +20,7 @@ abstract final class AppAssets {
   static const String getStartedBackground = 'assets/images/get_started_bg.png';
   static const String onboardingBackground1 = 'assets/images/onboarding_bg_1.png';
   static const String onboardingBackground2 = 'assets/images/onboarding_bg_2.png';
+  static const String brushLine = 'assets/images/brush_line.png';
 }
 
 abstract final class AppMessages {

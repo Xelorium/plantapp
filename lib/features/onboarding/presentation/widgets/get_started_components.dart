@@ -3,7 +3,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/core/constants/app_constants.dart';
-import 'package:plantapp/core/theme/app_colors.dart';
 
 class GetStartedBodyContent extends StatelessWidget {
   const GetStartedBodyContent({super.key});
@@ -21,10 +20,10 @@ class GetStartedBodyContent extends StatelessWidget {
             style: TextStyle(fontSize: 28.sp, fontWeight: FontWeight.bold),
             minFontSize: 8,
             overflow: TextOverflow.ellipsis,
-            const TextSpan(
+            TextSpan(
               text: 'Welcome to ',
-              style: TextStyle(color: AppColors.secondary, fontWeight: FontWeight.w400),
-              children: [
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontWeight: FontWeight.w400),
+              children: const [
                 TextSpan(
                   text: AppConstants.appName,
                   style: TextStyle(fontWeight: FontWeight.w600),

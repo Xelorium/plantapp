@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:plantapp/core/constants/app_constants.dart';
 
 class OnboardingBodyContent extends StatelessWidget {
   const OnboardingBodyContent({required this.pageController, super.key});
@@ -16,81 +16,81 @@ class OnboardingBodyContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //Take a photo to <b>identify</b>
-          // the plant!
-          //AutoSizeText.rich(
-          //  textScaleFactor: 1,
-          //  style: TextStyle(fontSize: 28.sp),
-          //  minFontSize: 8,
-          //  overflow: TextOverflow.ellipsis,
-          //  const TextSpan(
-          //    text: 'Take a photo to ',
-          //    style: TextStyle(color: AppColors.secondary, fontWeight: FontWeight.w500),
-          //    children: [
-          //      TextSpan(
-          //        text: 'identify',
-          //        style: TextStyle(fontWeight: FontWeight.w800),
-          //      ),
-          //      TextSpan(
-          //        text: '\nthe plant!',
-          //        style: TextStyle(fontWeight: FontWeight.w500),
-          //      ),
-          //    ],
-          //  ),
-          //  maxLines: 2,
-          //  textAlign: TextAlign.start,
-          //),
+          Stack(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(bottom: 14.h, right: 20.w),
+                child: AutoSizeText.rich(
+                  textScaleFactor: 1,
+                  style: TextStyle(
+                    fontSize: 28.sp,
+                    color: Theme.of(context).colorScheme.onSurface,
+                    letterSpacing: -1,
+                  ),
+                  minFontSize: 8,
+                  overflow: TextOverflow.ellipsis,
+                  const TextSpan(
+                    text: 'Take a photo to ',
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                    children: [
+                      TextSpan(
+                        text: 'identify',
+                        style: TextStyle(fontWeight: FontWeight.w800),
+                      ),
+                    ],
+                  ),
+                  maxLines: 1,
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                top: 40.h,
+                child: Image.asset(
+                  AppAssets.brushLine,
+                  color: Theme.of(context).colorScheme.onSurface,
+                  height: 35.h,
+                  width: 110.w,
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ],
+          ),
+
+          AutoSizeText(
+            'the plant!',
+            textScaleFactor: 1,
+            style: TextStyle(
+              fontSize: 28.sp,
+              fontWeight: FontWeight.w500,
+              color: Theme.of(context).colorScheme.onSurface,
+              height: 0.5,
+              letterSpacing: -1,
+            ),
+            minFontSize: 8,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            textAlign: TextAlign.start,
+          ),
         ],
       ),
     );
   }
 }
 
-class OnboardingFooterContent extends StatelessWidget {
-  const OnboardingFooterContent({super.key, this.onTermsTap, this.onPrivacyTap});
-
-  final VoidCallback? onTermsTap;
-  final VoidCallback? onPrivacyTap;
+class OnboardingFooterContent extends StatefulWidget {
+  const OnboardingFooterContent({super.key});
 
   @override
+  State<OnboardingFooterContent> createState() => _OnboardingFooterContentState();
+}
+
+class _OnboardingFooterContentState extends State<OnboardingFooterContent> {
+  @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: AutoSizeText.rich(
-        style: TextStyle(fontSize: 11.sp),
-        minFontSize: 4,
-        overflow: TextOverflow.ellipsis,
-        TextSpan(
-          text: 'By tapping next, you are agreeing to PlantID\n',
-          children: [
-            TextSpan(
-              text: 'Terms of Use',
-              recognizer: TapGestureRecognizer()..onTap = onTermsTap,
-              style: const TextStyle(
-                decoration: TextDecoration.underline,
-                decorationStyle: TextDecorationStyle.solid,
-              ),
-            ),
-            const TextSpan(
-              text: ' & ',
-              style: TextStyle(decoration: TextDecoration.none),
-            ),
-            TextSpan(
-              text: 'Privacy Policy',
-              recognizer: TapGestureRecognizer()..onTap = onPrivacyTap,
-              style: const TextStyle(
-                decoration: TextDecoration.underline,
-                decorationStyle: TextDecorationStyle.solid,
-              ),
-            ),
-            const TextSpan(
-              text: '.',
-              style: TextStyle(decoration: TextDecoration.none),
-            ),
-          ],
-        ),
-        maxLines: 2,
-        textAlign: TextAlign.center,
-      ),
+    return const Flexible(
+      child: SizedBox(),
     );
   }
 }
