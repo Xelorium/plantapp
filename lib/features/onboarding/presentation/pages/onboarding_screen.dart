@@ -37,7 +37,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     super.dispose();
   }
 
-
   List<Widget> get _onboardingPages => [
     Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -148,7 +147,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     ),
   ];
 
-  List<(Widget bodyContent, String backgroundImagePath, String buttonText, VoidCallback onButtonPressed, Widget footerContent)> _buildOnboardingComponents(int onboardingPageIndex) => [
+  List<(Widget bodyContent, String backgroundImagePath, String buttonText, VoidCallback onButtonPressed, Widget footerContent)> _buildOnboardingComponents(
+    int onboardingPageIndex,
+  ) => [
     (
       const GetStartedBodyContent(),
       AppAssets.getStartedBackground,
@@ -191,18 +192,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return BlocListener<OnboardingBloc, OnboardingState>(
       listenWhen: (previous, current) {
-        // Only listen when transitioning TO paywall (screen index 2)
-        // but not when already on paywall and state changes
-        return previous.currentScreenIndex != 2 && current.currentScreenIndex == 2;
+        return (previous.currentScreenIndex != 2 && current.currentScreenIndex == 2) ||
+            (previous.isOnboardingCompleted != current.isOnboardingCompleted && current.isOnboardingCompleted);
       },
       listener: (context, state) {
-        context.router.push(const PaywallRoute());
+        if (state.isOnboardingCompleted) {
+          context.router.replaceAll([const HomeRoute()]);
+        } else if (state.currentScreenIndex == 2) {
+          context.router.push(const PaywallRoute());
+        }
       },
       child: BlocBuilder<OnboardingBloc, OnboardingState>(
         builder: (context, state) {
           final components = _buildOnboardingComponents(state.onboardingPageIndex);
           final currentScreenIndex = state.currentScreenIndex.clamp(0, components.length - 1);
-          
+
           return Scaffold(
             body: OnboardingWrapper(
               bodyContent: components[currentScreenIndex].$1,

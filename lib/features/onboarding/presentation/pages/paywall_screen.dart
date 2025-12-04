@@ -23,140 +23,144 @@ class PaywallScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.paywallBackground,
-      body: SafeArea(
-        top: false,
-        child: Center(
-          child: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(AppAssets.paywallBackground),
-                fit: BoxFit.fill,
+    return PopScope(
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop) return;
+        context.read<OnboardingBloc>().add(const OnboardingEvent.closePaywall());
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.paywallBackground,
+        body: SafeArea(
+          top: false,
+          child: Center(
+            child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(AppAssets.paywallBackground),
+                  fit: BoxFit.fill,
+                ),
               ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 20.sp, top: 24.sp, right: 20.sp, bottom: 24.sp),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: SafeArea(
-                            child: Align(
-                              alignment: Alignment.topRight,
-                              child: IconButton(
-                                padding: EdgeInsets.zero,
-                                visualDensity: VisualDensity.compact,
-                                icon: Container(
-                                  padding: EdgeInsets.all(6.sp),
-                                  decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.black45),
-                                  child: Icon(
-                                    Icons.close,
-                                    color: AppColors.onPrimary,
-                                    size: 18.sp,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 20.sp, top: 24.sp, right: 20.sp, bottom: 24.sp),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: SafeArea(
+                              child: Align(
+                                alignment: Alignment.topRight,
+                                child: IconButton(
+                                  padding: EdgeInsets.zero,
+                                  visualDensity: VisualDensity.compact,
+                                  icon: Container(
+                                    padding: EdgeInsets.all(6.sp),
+                                    decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.black45),
+                                    child: Icon(
+                                      Icons.close,
+                                      color: AppColors.onPrimary,
+                                      size: 18.sp,
+                                    ),
                                   ),
+                                  onPressed: () {
+                                    context.read<OnboardingBloc>().add(const OnboardingEvent.closePaywall());
+                                    Navigator.of(context).pop();
+                                  },
                                 ),
-                                onPressed: () {
-                                  context.read<OnboardingBloc>().add(const OnboardingEvent.closePaywall());
-                                  Navigator.of(context).pop();
+                              ),
+                            ),
+                          ),
+                          AutoSizeText.rich(
+                            const TextSpan(
+                              text: AppConstants.appName,
+                              children: [
+                                TextSpan(
+                                  // MB TODO: STRINGIFY
+                                  text: ' Premium',
+                                  style: TextStyle(fontWeight: FontWeight.w300),
+                                ),
+                              ],
+                            ),
+                            maxLines: 1,
+                            style: TextStyle(
+                              fontSize: 27.sp,
+                              color: AppColors.onPrimary,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+
+                          AutoSizeText(
+                            // MB TODO: STRINGIFY
+                            'Access All Features',
+                            maxLines: 1,
+                            style: TextStyle(
+                              fontSize: 17.sp,
+                              color: AppColors.onPrimary.withValues(alpha: .7),
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                          SizedBox(height: 24.sp),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            clipBehavior: Clip.none,
+                            child: Row(
+                              children: List.generate(
+                                features.length,
+                                (index) {
+                                  final feature = features[index];
+                                  return Padding(
+                                    padding: EdgeInsets.only(right: 8.sp),
+
+                                    child: PaywallFeatureCard(
+                                      iconPath: feature.$1,
+                                      title: feature.$2,
+                                      subtitle: feature.$3,
+                                    ),
+                                  );
                                 },
                               ),
                             ),
                           ),
-                        ),
-                        AutoSizeText.rich(
-                          const TextSpan(
-                            text: AppConstants.appName,
-                            children: [
-                              TextSpan(
-                                // MB TODO: STRINGIFY
-                                text: ' Premium',
-                                style: TextStyle(fontWeight: FontWeight.w300),
-                              ),
-                            ],
+                          SizedBox(height: 24.sp),
+                          BlocBuilder<OnboardingBloc, OnboardingState>(
+                            builder: (context, state) {
+                              return ListView.separated(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
+                                itemCount: SubscriptionPlan.availablePlans.length,
+                                separatorBuilder: (context, index) => SizedBox(height: 16.sp),
+                                itemBuilder: (context, index) {
+                                  final plan = SubscriptionPlan.availablePlans[index];
+                                  return PaywallSubscriptionCard(
+                                    title: plan.title,
+                                    subtitle: plan.subtitle,
+                                    isSelected: state.selectedSubscriptionPlanId == plan.id,
+                                    badgeText: plan.badgeText,
+                                    onTap: () => context.read<OnboardingBloc>().add(
+                                      OnboardingEvent.selectSubscriptionPlan(plan.id),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
                           ),
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontSize: 27.sp,
-                            color: AppColors.onPrimary,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-
-                        AutoSizeText(
-                          // MB TODO: STRINGIFY
-                          'Access All Features',
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontSize: 17.sp,
-                            color: AppColors.onPrimary.withValues(alpha: .7),
-                            fontWeight: FontWeight.w300,
-                          ),
-                        ),
-                        SizedBox(height: 24.sp),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          clipBehavior: Clip.none,
-                          child: Row(
-                            children: List.generate(
-                              features.length,
-                              (index) {
-                                final feature = features[index];
-                                return Padding(
-                                  padding: EdgeInsets.only(right: 8.sp),
-
-                                  child: PaywallFeatureCard(
-                                    iconPath: feature.$1,
-                                    title: feature.$2,
-                                    subtitle: feature.$3,
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 24.sp),
-                        BlocBuilder<OnboardingBloc, OnboardingState>(
-                          builder: (context, state) {
-                            return ListView.separated(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              padding: EdgeInsets.zero,
-                              itemCount: SubscriptionPlan.availablePlans.length,
-                              separatorBuilder: (context, index) => SizedBox(height: 16.sp),
-                              itemBuilder: (context, index) {
-                                final plan = SubscriptionPlan.availablePlans[index];
-                                return PaywallSubscriptionCard(
-                                  title: plan.title,
-                                  subtitle: plan.subtitle,
-                                  isSelected: state.selectedSubscriptionPlanId == plan.id,
-                                  badgeText: plan.badgeText,
-                                  onTap: () => context.read<OnboardingBloc>().add(
-                                    OnboardingEvent.selectSubscriptionPlan(plan.id),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                _Footer(
-                  onTryButtonPressed: () {
-                    context.read<OnboardingBloc>().add(const OnboardingEvent.completeOnboarding());
-                  },
-                  onPrivacyPressed: () {},
-                  onRestorePressed: () {},
-                  onTermsPressed: () {},
-                ),
-              ],
+                  _Footer(
+                    onTryButtonPressed: () => context.read<OnboardingBloc>().add(const OnboardingEvent.completeOnboarding()),
+                    onPrivacyPressed: () {},
+                    onRestorePressed: () {},
+                    onTermsPressed: () {},
+                  ),
+                ],
+              ),
             ),
           ),
         ),
