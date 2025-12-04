@@ -37,11 +37,32 @@ class PaywallScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(left: 20.w, top: 60.h, right: 20.w, bottom: 24.h),
+                    padding: EdgeInsets.only(left: 20.sp, top: 24.sp, right: 20.sp, bottom: 24.sp),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: IconButton(
+                              padding: EdgeInsets.zero,
+                              visualDensity: VisualDensity.compact,
+                              icon: Container(
+                                padding: EdgeInsets.all(6.sp),
+                                decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.black45),
+                                child: Icon(
+                                  Icons.close,
+                                  color: AppColors.onPrimary,
+                                  size: 18.sp,
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ),
+                        ),
                         AutoSizeText.rich(
                           const TextSpan(
                             text: AppConstants.appName,
@@ -71,25 +92,43 @@ class PaywallScreen extends StatelessWidget {
                             fontWeight: FontWeight.w300,
                           ),
                         ),
-                        SizedBox(height: 24.h),
+                        SizedBox(height: 24.sp),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          clipBehavior: Clip.none,
+                          child: Row(
+                            children: List.generate(
+                              features.length,
+                              (index) {
+                                final feature = features[index];
+                                return Padding(
+                                  padding: EdgeInsets.only(right: 8.sp),
 
-                        SizedBox(
-                          height: 124.sp,
-                          child: ListView.separated(
-                            clipBehavior: Clip.none,
-                            itemBuilder: (context, index) {
-                              final feature = features[index];
-
-                              return PaywallFeatureCard(
-                                iconPath: feature.$1,
-                                title: feature.$2,
-                                subtitle: feature.$3,
-                              );
-                            },
-                            separatorBuilder: (context, index) => SizedBox(width: 8.w),
-                            itemCount: features.length,
-                            scrollDirection: Axis.horizontal,
+                                  child: PaywallFeatureCard(
+                                    iconPath: feature.$1,
+                                    title: feature.$2,
+                                    subtitle: feature.$3,
+                                  ),
+                                );
+                              },
+                            ),
                           ),
+                        ),
+                        SizedBox(height: 24.sp),
+
+                        PaywallSubscriptionCard(
+                          title: '1 Month',
+                          subtitle: r'$32.99 per month, auto renewable',
+                          isSelected: false,
+                          onTap: () {},
+                        ),
+                        SizedBox(height: 16.sp),
+                        PaywallSubscriptionCard(
+                          title: '1 Year',
+                          subtitle: r'First 3 days free, then $529,99/year',
+                          isSelected: true,
+                          badgeText: 'Save 50%',
+                          onTap: () {},
                         ),
                       ],
                     ),
@@ -131,18 +170,18 @@ class _Footer extends StatelessWidget {
       height: .16.sh,
       width: double.infinity,
       child: Padding(
-        padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 4.h),
+        padding: EdgeInsets.only(left: 20.sp, right: 20.sp, bottom: 4.sp),
         child: Column(
           children: [
             FilledButton(
               onPressed: onTryButtonPressed,
               style: ButtonStyle(
-                fixedSize: WidgetStatePropertyAll(Size(double.infinity, 56.h)),
+                fixedSize: WidgetStatePropertyAll(Size(double.infinity, 56.sp)),
               ),
               // MB TODO: STRINGIFY
               child: AutoSizeText('Try for 3 days', style: TextStyle(fontSize: 16.sp)),
             ),
-            SizedBox(height: 8.h),
+            SizedBox(height: 8.sp),
             Expanded(
               child: Column(
                 children: [
