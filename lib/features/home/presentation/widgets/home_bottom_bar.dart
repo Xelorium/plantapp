@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:plantapp/core/constants/app_constants.dart';
+import 'package:plantapp/core/theme/app_colors.dart';
 
 part 'bottom_bar_item.dart';
 
@@ -21,27 +25,27 @@ class HomeBottomBar extends StatefulWidget {
 class _HomeBottomBarState extends State<HomeBottomBar> {
   final List<BottomBarItem> _tabs = [
     const BottomBarItem(
-      icon: Icons.home_outlined,
+      iconPath: AppAssets.navBarHomeSvg,
       label: 'Home',
       isActive: false,
     ),
     const BottomBarItem(
-      icon: Icons.favorite_border,
+      iconPath: AppAssets.navBarDiagnoseSvg,
       label: 'Diagnose',
       isActive: false,
     ),
     const BottomBarItem(
-      icon: null,
+      iconPath: null,
       label: '',
       isActive: false,
     ),
     const BottomBarItem(
-      icon: Icons.notifications_outlined,
+      iconPath: AppAssets.navBarGardenSvg,
       label: 'My Garden',
       isActive: false,
     ),
     const BottomBarItem(
-      icon: Icons.person_outline,
+      iconPath: AppAssets.navBarProfileSvg,
       label: 'Profile',
       isActive: false,
     ),
@@ -52,39 +56,52 @@ class _HomeBottomBarState extends State<HomeBottomBar> {
     final leftTabs = _tabs.sublist(0, widget.fabIndex);
     final rightTabs = _tabs.sublist(widget.fabIndex + 1);
 
-    return BottomAppBar(
-      height: 72,
-      shape: const CircularNotchedRectangle(),
-      notchMargin: 8,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // LEFT SIDE
-          Row(
-            children: [
-              for (int i = 0; i < leftTabs.length; i++)
-                BottomBarItem(
-                  icon: leftTabs[i].icon,
-                  label: leftTabs[i].label,
-                  isActive: widget.currentIndex == i,
-                  onTap: () => widget.onItemSelected(i),
-                ),
-            ],
-          ),
+    final theme = Theme.of(context);
 
-          // RIGHT SIDE
-          Row(
-            children: [
-              for (int i = 0; i < rightTabs.length; i++)
-                BottomBarItem(
-                  icon: rightTabs[i].icon,
-                  label: rightTabs[i].label,
-                  isActive: widget.currentIndex == i + widget.fabIndex + 1,
-                  onTap: () => widget.onItemSelected(i + widget.fabIndex + 1),
-                ),
-            ],
+    return BottomAppBar(
+      height: 80.sp,
+      notchMargin: 0,
+      padding: EdgeInsets.zero,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surface,
+          border: Border(
+            top: BorderSide(
+              color: theme.colorScheme.onSurface.withValues(alpha: .1),
+              width: 1.sp,
+            ),
           ),
-        ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                for (int i = 0; i < leftTabs.length; i++)
+                  BottomBarItem(
+                    iconPath: leftTabs[i].iconPath,
+                    label: leftTabs[i].label,
+                    isActive: widget.currentIndex == i,
+                    padding: EdgeInsets.only(right: i == 0 ? 2.sp : 0),
+                    onTap: () => widget.onItemSelected(i),
+                  ),
+              ],
+            ),
+
+            Row(
+              children: [
+                for (int i = 0; i < rightTabs.length; i++)
+                  BottomBarItem(
+                    iconPath: rightTabs[i].iconPath,
+                    label: rightTabs[i].label,
+                    isActive: widget.currentIndex == i + widget.fabIndex + 1,
+                    padding: EdgeInsets.only(left: i == rightTabs.length - 1 ? 2.sp : 0),
+                    onTap: () => widget.onItemSelected(i + widget.fabIndex + 1),
+                  ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

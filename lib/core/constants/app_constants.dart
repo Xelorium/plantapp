@@ -25,6 +25,12 @@ abstract final class AppAssets {
 
   static const String scannerFeatureIconSvg = 'assets/icons/scanner_feature_icon.svg';
   static const String speedFeatureIconSvg = 'assets/icons/speed_feature_icon.svg';
+
+  static const String navBarHomeSvg = 'assets/icons/navigation/home_icon.svg';
+  static const String navBarDiagnoseSvg = 'assets/icons/navigation/diagnose_icon.svg';
+  static const String navBarScannerSvg = 'assets/icons/navigation/scanner_icon.svg';
+  static const String navBarGardenSvg = 'assets/icons/navigation/garden_icon.svg';
+  static const String navBarProfileSvg = 'assets/icons/navigation/profile_icon.svg';
 }
 
 abstract final class AppMessages {

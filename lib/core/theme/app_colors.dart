@@ -4,7 +4,7 @@ class AppColors {
   // Primary Brand Colors
   static const Color primary = Color(0xFF28AF6E);
   static const Color onPrimary = Colors.white;
-  
+
   // Secondary / Text Colors
   static const Color secondary = Color(0xFF13231B);
   static const Color onSecondary = Colors.white;
@@ -12,7 +12,7 @@ class AppColors {
   // Backgrounds
   static const Color background = Color(0xFFFFFFFF);
   static const Color surface = Color(0xFFF5F5F5); // Light grey for inputs/backgrounds
-  
+
   // Text
   static const Color textPrimary = Color(0xFF13231B);
   static const Color textSecondary = Color(0xFF979798); // Grey subtext
@@ -28,7 +28,10 @@ class AppColors {
   static const Color divider = Color(0xFFF3F4F6);
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
-  
+
+  // FBA Colors
+  static const Color fbaBackground = Color(0xFF28AF6E); // Light greenish background
+
   // Paywall Specific
   static const Color paywallBackground = Color(0xFF101E17); // Dark background for paywall
   static const Color paywallCardOverlay = Color(0x4D000000); // Semi-transparent black

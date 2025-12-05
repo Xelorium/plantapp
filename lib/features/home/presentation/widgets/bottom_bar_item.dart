@@ -2,20 +2,20 @@ part of 'home_bottom_bar.dart';
 
 class BottomBarItem extends StatelessWidget {
   const BottomBarItem({
-    required this.icon,
+    required this.iconPath,
     required this.label,
     required this.isActive,
     super.key,
     this.onTap,
-    this.width = 70,
-    this.height = 72,
-    this.activeColor = Colors.green,
-    this.inactiveColor = Colors.grey,
-    this.scale = 1.15,
-    this.duration = const Duration(milliseconds: 200),
+    this.width = 74,
+    this.height = 54,
+    this.activeColor = AppColors.primary,
+    this.inactiveColor = AppColors.textSecondary,
+    this.duration = const Duration(milliseconds: 300),
+    this.padding = EdgeInsets.zero,
   });
 
-  final IconData? icon;
+  final String? iconPath;
   final String label;
   final bool isActive;
   final VoidCallback? onTap;
@@ -24,63 +24,71 @@ class BottomBarItem extends StatelessWidget {
   final double height;
   final Color activeColor;
   final Color inactiveColor;
-  final double scale;
   final Duration duration;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
-    if (icon == null) return SizedBox(width: width, height: height);
+    if (iconPath == null) return SizedBox(width: width, height: height);
 
     final color = isActive ? activeColor : inactiveColor;
 
-    return SizedBox(
-      width: width,
-      height: height,
-      child: TweenAnimationBuilder<double>(
-        tween: Tween(begin: 1, end: isActive ? scale : 1.0),
-        duration: duration,
-        curve: Curves.easeOut,
-        builder: (context, value, _) {
-          return Material(
-            color: Colors.transparent,
-            child: InkResponse(
-              radius: 30,
-              splashColor: activeColor.withValues(alpha: 0.2),
-              highlightColor: activeColor.withValues(alpha: 0.05),
-              onTap: onTap,
-              customBorder: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Transform.scale(
-                    scale: value,
-                    child: Icon(icon, size: 24, color: color),
-                  ),
-                  const SizedBox(height: 4),
-                  AnimatedDefaultTextStyle(
+    return Padding(
+      padding: padding,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minWidth: width.sp,
+          maxWidth: (width + 30).sp,
+          minHeight: height.sp,
+          maxHeight: height.sp,
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkResponse(
+            radius: 30,
+            splashColor: activeColor.withValues(alpha: 0.2),
+            highlightColor: activeColor.withValues(alpha: 0.05),
+            onTap: onTap,
+            customBorder: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SvgPicture.asset(
+                  iconPath!,
+                  width: 26.sp,
+                  height: 26.sp,
+                  colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+                ),
+                Flexible(
+                  child: AnimatedDefaultTextStyle(
                     duration: duration,
+                    maxLines: 1,
                     style: TextStyle(
-                      fontSize: isActive ? 12 : 11,
-                      fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
+                      fontSize: 11.sp,
+                      fontWeight: FontWeight.w400,
                       color: color,
                     ),
                     child: AnimatedOpacity(
                       duration: duration,
                       opacity: isActive ? 1.0 : 0.7,
-                      child: AnimatedSlide(
-                        duration: duration,
-                        offset: isActive ? Offset.zero : const Offset(0, 0.2),
-                        child: Text(label),
+                      child: Text(
+                        label,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontSize: 11.sp,
+                          fontWeight: FontWeight.w400,
+                          color: color,
+                        ),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }
