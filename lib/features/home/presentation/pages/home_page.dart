@@ -1,6 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:plantapp/features/home/presentation/widgets/home/home_header.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -8,45 +9,18 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return SafeArea(
       child: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        padding: EdgeInsets.symmetric(vertical: 16.sp),
         children: [
-          Text(
-            'Hi, plant lover!',
-            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400),
-          ),
-          const SizedBox(height: 4),
-          const Row(
-            children: [
-              Text(
-                'Good Afternoon!',
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(width: 8),
-              Icon(Icons.cloud_outlined),
-            ],
-          ),
+          const HomeHeader(),
 
           const SizedBox(height: 16),
 
-          // Search
-          TextField(
-            decoration: InputDecoration(
-              hintText: 'Search for plants',
-              prefixIcon: const Icon(Icons.search),
-              filled: true,
-              fillColor: Colors.grey.shade100,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
-                borderSide: BorderSide.none,
-              ),
-            ),
-          ),
-
           const SizedBox(height: 20),
 
-          // Premium banner
           Container(
             height: 80,
             decoration: BoxDecoration(
@@ -56,8 +30,6 @@ class HomePage extends StatelessWidget {
           ),
 
           const SizedBox(height: 20),
-
-          // Category cards...
         ],
       ),
     );

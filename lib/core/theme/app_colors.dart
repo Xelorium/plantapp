@@ -9,9 +9,13 @@ class AppColors {
   static const Color secondary = Color(0xFF13231B);
   static const Color onSecondary = Colors.white;
 
+  // TextField
+
   // Backgrounds
   static const Color background = Color(0xFFFFFFFF);
   static const Color surface = Color(0xFFF5F5F5); // Light grey for inputs/backgrounds
+  // Home page background #FBFAFA
+  static const Color homeBackground = Color(0xFFFBFAFA);
 
   // Text
   static const Color textPrimary = Color(0xFF13231B);

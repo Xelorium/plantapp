@@ -7,7 +7,7 @@ abstract final class AppTheme {
     return ThemeData(
       useMaterial3: true,
       primaryColor: AppColors.primary,
-      scaffoldBackgroundColor: AppColors.background,
+      scaffoldBackgroundColor: AppColors.homeBackground,
       fontFamily: AppFonts.primary,
 
       // Color Scheme
