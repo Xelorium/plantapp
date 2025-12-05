@@ -19,14 +19,23 @@ class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
     AutoRoute(page: OnboardingRoute.page, initial: !_isOnboardingComplete),
-    AutoRoute(page: HomeRoute.page, initial: _isOnboardingComplete),
     CustomRoute<void>(
       page: PaywallRoute.page,
       transitionsBuilder: TransitionsBuilders.slideBottom,
       fullscreenDialog: true,
-      predictiveBackPageTransitionsBuilder: (context, animation, secondaryAnimation, child) {
-        return TransitionsBuilders.slideBottom(context, animation, secondaryAnimation, child);
-      },
+      predictiveBackPageTransitionsBuilder: TransitionsBuilders.slideBottom,
+    ),
+    CustomRoute<void>(
+      page: MainRoute.page,
+      initial: _isOnboardingComplete,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      children: [
+        CustomRoute<void>(page: HomeRoute.page, initial: _isOnboardingComplete, transitionsBuilder: TransitionsBuilders.fadeIn),
+        CustomRoute<void>(page: DiagnoseRoute.page, transitionsBuilder: TransitionsBuilders.fadeIn),
+        CustomRoute<void>(page: ScannerRoute.page, transitionsBuilder: TransitionsBuilders.fadeIn),
+        CustomRoute<void>(page: GardenRoute.page, transitionsBuilder: TransitionsBuilders.fadeIn),
+        CustomRoute<void>(page: ProfileRoute.page, transitionsBuilder: TransitionsBuilders.fadeIn),
+      ],
     ),
   ];
 }
