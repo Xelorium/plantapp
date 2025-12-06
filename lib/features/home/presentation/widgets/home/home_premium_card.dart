@@ -28,7 +28,7 @@ class HomePremiumCard extends StatelessWidget {
               Badge.count(
                 count: 1,
                 offset: const Offset(-4, 2),
-                textStyle: AppTextStyles.bodySmall.copyWith(
+                textStyle: AppTextStyles.bodySmall(context).copyWith(
                   fontWeight: FontWeight.w600,
                   color: AppColors.onSecondary,
                 ),
@@ -45,7 +45,7 @@ class HomePremiumCard extends StatelessWidget {
                     GradientRichText(
                       textSpan: TextSpan(
                         text: AppStrings.free,
-                        style: AppTextStyles.bodyLarge.copyWith(
+                        style: AppTextStyles.bodyLarge(context).copyWith(
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0,
                           color: AppColors.onSecondary,
@@ -53,7 +53,7 @@ class HomePremiumCard extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: AppStrings.premiumAvailable,
-                            style: AppTextStyles.bodyLarge.copyWith(
+                            style: AppTextStyles.bodyLarge(context).copyWith(
                               fontWeight: FontWeight.w600,
                               letterSpacing: 0,
                               color: AppColors.onSecondary,
@@ -73,7 +73,7 @@ class HomePremiumCard extends StatelessWidget {
 
                     GradientText(
                       AppStrings.tapToUpgrade,
-                      style: AppTextStyles.bodySmall.copyWith(
+                      style: AppTextStyles.bodySmall(context).copyWith(
                         fontWeight: FontWeight.w400,
                       ),
                       gradient: const LinearGradient(

@@ -48,7 +48,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               padding: EdgeInsets.only(bottom: 14.h, right: 20.w), // Keeping responsive specific padding as is or matching closest Spacings if applicable. Let's keep specific where critical layout.
               child: AutoSizeText.rich(
                 textScaleFactor: 1,
-                style: AppTextStyles.h1.copyWith(
+                style: AppTextStyles.h1(context).copyWith(
                   fontSize: 28.sp,
                   color: Theme.of(context).colorScheme.onSurface,
                   letterSpacing: -1,
@@ -86,7 +86,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         AutoSizeText(
           AppStrings.thePlant,
           textScaleFactor: 1,
-          style: AppTextStyles.h1.copyWith(
+          style: AppTextStyles.h1(context).copyWith(
             fontSize: 28.sp,
             fontWeight: FontWeight.w500,
             color: Theme.of(context).colorScheme.onSurface,
@@ -109,7 +109,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               padding: EdgeInsets.only(bottom: 14.h, right: 20.w),
               child: AutoSizeText.rich(
                 textScaleFactor: 1,
-                style: AppTextStyles.h1.copyWith(
+                style: AppTextStyles.h1(context).copyWith(
                   fontSize: 28.sp,
                   color: Theme.of(context).colorScheme.onSurface,
                   letterSpacing: -1,

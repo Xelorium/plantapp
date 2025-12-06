@@ -46,7 +46,7 @@ class CategoryCard extends StatelessWidget {
               width: .3.sw,
               child: AutoSizeText(
                 category.title,
-                style: AppTextStyles.sectionTitle.copyWith(fontSize: 18.sp),
+                style: AppTextStyles.sectionTitle(context).copyWith(fontSize: 16.sp),
                 maxLines: 2,
               ),
             ),

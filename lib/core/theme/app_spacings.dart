@@ -9,8 +9,8 @@ abstract final class AppSpacings {
   static EdgeInsets get pagePaddingAll => EdgeInsets.all(24.w);
 
   // Card Paddings
-  static EdgeInsets get cardPadding => EdgeInsets.all(16.w);
-  static EdgeInsets get cardPaddingSmall => EdgeInsets.all(12.w);
+  static EdgeInsets get cardPadding => EdgeInsets.all(16.sp);
+  static EdgeInsets get cardPaddingSmall => EdgeInsets.all(12.sp);
 
   // Item Spacings (Gap between items)
   static double get s4 => 4.w;
