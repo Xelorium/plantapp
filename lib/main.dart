@@ -1,20 +1,21 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plantapp/app.dart';
+import 'package:plantapp/core/init/dependency_injection.dart';
+import 'package:plantapp/core/logging/bloc_observer.dart';
 
 void main() {
-  runApp(const MainApp());
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+  runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await configureDependencies();
+      Bloc.observer = GlobalBlocObserver();
+      runApp(const PlantApp());
+    },
+    (error, stackTrace) {
+      // TODO: Handle uncaught errors
+      debugPrint(error.toString());
+    },
+  );
 }
