@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/features/home/data/models/category_model.dart';
@@ -28,11 +29,11 @@ class CategoryCard extends StatelessWidget {
               bottom: 0,
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(bottomRight: Radius.circular(12)),
-                child: Image.network(
-                  imageUrl,
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
                   height: .4.sw,
                   fit: BoxFit.fitHeight,
-                  errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
+                  errorWidget: (context, error, stackTrace) => const SizedBox.shrink(),
                 ),
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/features/home/data/models/question_model.dart';
@@ -15,7 +16,7 @@ class QuestionCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         image: DecorationImage(
-          image: NetworkImage(question.imageUri),
+          image: CachedNetworkImageProvider(question.imageUri),
           fit: BoxFit.cover,
         ),
       ),
