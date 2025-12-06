@@ -83,7 +83,6 @@ class HomePage extends StatelessWidget {
                         crossAxisCount: 2,
                         mainAxisSpacing: 16.sp,
                         crossAxisSpacing: 16.sp,
-                        childAspectRatio: 1,
                       ),
                       delegate: SliverChildBuilderDelegate(
                         (context, index) => CategoryCard(category: state.categories[index]),
