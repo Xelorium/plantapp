@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:plantapp/core/constants/app_constants.dart';
@@ -18,6 +19,18 @@ abstract class NetworkModule {
     );
 
     dio.interceptors.add(ErrorInterceptor());
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onResponse: (response, handler) {
+          if (response.data is String) {
+            try {
+              response.data = jsonDecode(response.data as String);
+            } catch (_) {}
+          }
+          handler.next(response);
+        },
+      ),
+    );
     dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
 
     return dio;
