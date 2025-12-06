@@ -71,7 +71,7 @@ abstract final class AppStrings {
   static const String yearlyPlanTitle = '1 Year';
   static const String yearlyPlanSubtitle = r'First 3 days free, then $529,99/year';
   static const String yearlyPlanBadge = 'Save 50%';
-  static const String paywallDisclaimer = 'After the 3-day free trial period you\'ll be charged ₺274.99 per year unless you cancel\\nbefore the trial expires. Yearly Subscription is Auto-Renewable';
+  static const String paywallDisclaimer = r"After the 3-day free trial period you'll be charged ₺274.99 per year unless you cancel\nbefore the trial expires. Yearly Subscription is Auto-Renewable";
   
   // Empty States
   static const String empty = '';
