@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/core/constants/app_constants.dart';
+import 'package:plantapp/core/theme/app_spacings.dart';
+import 'package:plantapp/core/theme/app_text_styles.dart';
 
 class HomeHeader extends StatefulWidget {
   const HomeHeader({super.key, this.onSearchSubmitted});
@@ -31,7 +33,7 @@ class _HomeHeaderState extends State<HomeHeader> {
     final theme = Theme.of(context);
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.sp, vertical: 16.sp),
+      padding: EdgeInsets.symmetric(horizontal: AppSpacings.s24, vertical: AppSpacings.s16),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: const AssetImage(AppAssets.headerBackground),
@@ -46,7 +48,7 @@ class _HomeHeaderState extends State<HomeHeader> {
               Flexible(
                 child: Text(
                   AppStrings.hiPlantLover,
-                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400, color: theme.colorScheme.onSurface),
+                  style: AppTextStyles.bodyLarge.copyWith(fontWeight: FontWeight.w400, color: theme.colorScheme.onSurface),
                 ),
               ),
             ],
@@ -57,12 +59,12 @@ class _HomeHeaderState extends State<HomeHeader> {
               Flexible(
                 child: Text(
                   AppStrings.goodAfternoon,
-                  style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w500, color: theme.colorScheme.onSurface),
+                  style: AppTextStyles.h2.copyWith(color: theme.colorScheme.onSurface),
                 ),
               ),
             ],
           ),
-          SizedBox(height: 16.sp),
+          SizedBox(height: AppSpacings.s16),
           TextField(
             controller: _searchController,
             textInputAction: TextInputAction.search,
@@ -82,15 +84,15 @@ class _HomeHeaderState extends State<HomeHeader> {
                       child: const Icon(Icons.clear),
                     )
                   : null,
-              contentPadding: EdgeInsets.symmetric(vertical: 12.sp, horizontal: 16.sp),
+              contentPadding: EdgeInsets.symmetric(vertical: 12.sp, horizontal: AppSpacings.s16),
               filled: true,
               fillColor: theme.colorScheme.onPrimary.withValues(alpha: .88),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(AppSpacings.radius),
                 borderSide: BorderSide(color: theme.colorScheme.onSurface.withValues(alpha: 0.25)),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(AppSpacings.radius),
                 borderSide: BorderSide(color: theme.colorScheme.onSurface.withValues(alpha: 0.25)),
               ),
             ),

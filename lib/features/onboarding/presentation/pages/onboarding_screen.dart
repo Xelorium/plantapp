@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/core/constants/app_constants.dart';
 import 'package:plantapp/core/navigation/app_router.gr.dart';
+import 'package:plantapp/core/theme/app_text_styles.dart';
 import 'package:plantapp/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:plantapp/features/onboarding/presentation/widgets/get_started_components.dart';
 import 'package:plantapp/features/onboarding/presentation/widgets/onboarding_components.dart';
@@ -44,10 +45,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         Stack(
           children: [
             Padding(
-              padding: EdgeInsets.only(bottom: 14.h, right: 20.w),
+              padding: EdgeInsets.only(bottom: 14.h, right: 20.w), // Keeping responsive specific padding as is or matching closest Spacings if applicable. Let's keep specific where critical layout.
               child: AutoSizeText.rich(
                 textScaleFactor: 1,
-                style: TextStyle(
+                style: AppTextStyles.h1.copyWith(
                   fontSize: 28.sp,
                   color: Theme.of(context).colorScheme.onSurface,
                   letterSpacing: -1,
@@ -85,7 +86,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         AutoSizeText(
           AppStrings.thePlant,
           textScaleFactor: 1,
-          style: TextStyle(
+          style: AppTextStyles.h1.copyWith(
             fontSize: 28.sp,
             fontWeight: FontWeight.w500,
             color: Theme.of(context).colorScheme.onSurface,
@@ -108,7 +109,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               padding: EdgeInsets.only(bottom: 14.h, right: 20.w),
               child: AutoSizeText.rich(
                 textScaleFactor: 1,
-                style: TextStyle(
+                style: AppTextStyles.h1.copyWith(
                   fontSize: 28.sp,
                   color: Theme.of(context).colorScheme.onSurface,
                   letterSpacing: -1,

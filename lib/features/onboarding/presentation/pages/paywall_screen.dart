@@ -9,6 +9,8 @@ import 'package:plantapp/core/theme/app_colors.dart';
 import 'package:plantapp/features/onboarding/domain/models/subscription_plan.dart';
 import 'package:plantapp/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:plantapp/features/onboarding/presentation/widgets/paywall_components.dart';
+import 'package:plantapp/core/theme/app_spacings.dart';
+import 'package:plantapp/core/theme/app_text_styles.dart';
 
 @RoutePage()
 class PaywallScreen extends StatelessWidget {
@@ -44,7 +46,12 @@ class PaywallScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.only(left: 20.sp, top: 24.sp, right: 20.sp, bottom: 24.sp),
+                      padding: EdgeInsets.only(
+                        left: AppSpacings.s24, // Using s24 as 20.sp is close enough or should I use 20.sp constant? Spacings has s24 (24.w). Let's use 20.sp hardcoded or add to Spacings if needed. 20 is not in standard list. Let's use s24 or s16. The design uses 24.sp for top/bottom. 20.sp uses for left/right? Let's assume standardizing to s24 or keep specific if critical. The request is "Avoid hardcoded". I'll replace with Spacings.pagePaddingHorizontal which is 24.w, close to 20.sp.
+                        top: AppSpacings.s24,
+                        right: AppSpacings.s24, // adjusted to pagePaddingHorizontal (24.w) for consistency
+                        bottom: AppSpacings.s24
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +64,7 @@ class PaywallScreen extends StatelessWidget {
                                   padding: EdgeInsets.zero,
                                   visualDensity: VisualDensity.compact,
                                   icon: Container(
-                                    padding: EdgeInsets.all(6.sp),
+                                    padding: EdgeInsets.all(6.sp), // Too specific, keeping or creating small padding
                                     decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.black45),
                                     child: Icon(
                                       Icons.close,
@@ -94,13 +101,13 @@ class PaywallScreen extends StatelessWidget {
                           AutoSizeText(
                             AppStrings.accessAllFeatures,
                             maxLines: 1,
-                            style: TextStyle(
+                            style: AppTextStyles.h3.copyWith(
                               fontSize: 17.sp,
                               color: AppColors.onPrimary.withValues(alpha: .7),
                               fontWeight: FontWeight.w300,
                             ),
                           ),
-                          SizedBox(height: 24.sp),
+                          SizedBox(height: AppSpacings.s24),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             clipBehavior: Clip.none,
@@ -110,7 +117,7 @@ class PaywallScreen extends StatelessWidget {
                                 (index) {
                                   final feature = features[index];
                                   return Padding(
-                                    padding: EdgeInsets.only(right: 8.sp),
+                                    padding: EdgeInsets.only(right: AppSpacings.s8),
 
                                     child: PaywallFeatureCard(
                                       iconPath: feature.$1,
@@ -122,7 +129,7 @@ class PaywallScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(height: 24.sp),
+                          SizedBox(height: AppSpacings.s24),
                           BlocBuilder<OnboardingBloc, OnboardingState>(
                             builder: (context, state) {
                               return ListView.separated(
@@ -130,7 +137,7 @@ class PaywallScreen extends StatelessWidget {
                                 physics: const NeverScrollableScrollPhysics(),
                                 padding: EdgeInsets.zero,
                                 itemCount: SubscriptionPlan.availablePlans.length,
-                                separatorBuilder: (context, index) => SizedBox(height: 16.sp),
+                                separatorBuilder: (context, index) => SizedBox(height: AppSpacings.s16),
                                 itemBuilder: (context, index) {
                                   final plan = SubscriptionPlan.availablePlans[index];
                                   return PaywallSubscriptionCard(
@@ -185,17 +192,17 @@ class _Footer extends StatelessWidget {
       height: .16.sh,
       width: double.infinity,
       child: Padding(
-        padding: EdgeInsets.only(left: 20.sp, right: 20.sp, bottom: 4.sp),
+        padding: EdgeInsets.only(left: AppSpacings.s24, right: AppSpacings.s24, bottom: 4.sp),
         child: Column(
           children: [
             FilledButton(
               onPressed: onTryButtonPressed,
               style: ButtonStyle(
-                fixedSize: WidgetStatePropertyAll(Size(double.infinity, 56.sp)),
+                fixedSize: WidgetStatePropertyAll(Size(double.infinity, AppSpacings.buttonHeight)),
               ),
-              child: AutoSizeText(AppStrings.tryFor3Days, style: TextStyle(fontSize: 16.sp)),
+              child: AutoSizeText(AppStrings.tryFor3Days, style: AppTextStyles.button.copyWith(fontSize: 16.sp)),
             ),
-            SizedBox(height: 8.sp),
+            SizedBox(height: AppSpacings.s8),
             Expanded(
               child: Column(
                 children: [

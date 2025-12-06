@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:plantapp/core/constants/app_constants.dart';
 import 'package:plantapp/core/theme/app_colors.dart';
+import 'package:plantapp/core/theme/app_spacings.dart';
+import 'package:plantapp/core/theme/app_text_styles.dart';
 import 'package:plantapp/core/widgets/gradient_text.dart';
 
 class HomePremiumCard extends StatelessWidget {
@@ -13,26 +15,20 @@ class HomePremiumCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-        left: 16.sp,
-        right: 10.sp,
-        bottom: 12.sp,
-        top: 12.sp,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: AppSpacings.s24),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppSpacings.radius),
         child: Container(
           alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(color: AppColors.premiumBannerBackground, borderRadius: BorderRadius.circular(12)),
-          padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 12.sp),
+          decoration: BoxDecoration(color: AppColors.premiumBannerBackground, borderRadius: BorderRadius.circular(AppSpacings.radius)),
+          padding: EdgeInsets.symmetric(horizontal: AppSpacings.s16, vertical: AppSpacings.s12),
           child: Row(
             children: [
               Badge.count(
                 count: 1,
                 offset: const Offset(-4, 2),
-                textStyle: TextStyle(
-                  fontSize: 14.sp,
+                textStyle: AppTextStyles.bodySmall.copyWith(
                   fontWeight: FontWeight.w600,
                   color: AppColors.onSecondary,
                 ),
@@ -41,7 +37,7 @@ class HomePremiumCard extends StatelessWidget {
                   child: SvgPicture.asset(AppAssets.mailIconSvg, fit: BoxFit.fitWidth),
                 ),
               ),
-              SizedBox(width: 12.sp),
+              SizedBox(width: AppSpacings.s12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,8 +45,7 @@ class HomePremiumCard extends StatelessWidget {
                     GradientRichText(
                       textSpan: TextSpan(
                         text: AppStrings.free,
-                        style: TextStyle(
-                          fontSize: 16.sp,
+                        style: AppTextStyles.bodyLarge.copyWith(
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0,
                           color: AppColors.onSecondary,
@@ -58,8 +53,7 @@ class HomePremiumCard extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: AppStrings.premiumAvailable,
-                            style: TextStyle(
-                              fontSize: 16.sp,
+                            style: AppTextStyles.bodyLarge.copyWith(
                               fontWeight: FontWeight.w600,
                               letterSpacing: 0,
                               color: AppColors.onSecondary,
@@ -79,8 +73,7 @@ class HomePremiumCard extends StatelessWidget {
 
                     GradientText(
                       AppStrings.tapToUpgrade,
-                      style: TextStyle(
-                        fontSize: 13.sp,
+                      style: AppTextStyles.bodySmall.copyWith(
                         fontWeight: FontWeight.w400,
                       ),
                       gradient: const LinearGradient(
