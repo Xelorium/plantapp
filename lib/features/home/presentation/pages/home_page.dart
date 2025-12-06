@@ -8,6 +8,7 @@ import 'package:plantapp/core/init/dependency_injection.dart';
 import 'package:plantapp/features/home/presentation/bloc/home_bloc.dart';
 import 'package:plantapp/features/home/presentation/bloc/home_event.dart';
 import 'package:plantapp/features/home/presentation/bloc/home_state.dart';
+import 'package:plantapp/features/home/presentation/widgets/home/category_card.dart';
 import 'package:plantapp/features/home/presentation/widgets/home/home_header.dart';
 import 'package:plantapp/features/home/presentation/widgets/home/home_premium_card.dart';
 import 'package:plantapp/features/home/presentation/widgets/home/question_card.dart';
@@ -66,6 +67,31 @@ class HomePage extends StatelessWidget {
                     },
                   ),
                 ),
+              ),
+
+              SliverToBoxAdapter(child: SizedBox(height: 24.sp)),
+
+              // Categories Grid
+              BlocBuilder<HomeBloc, HomeState>(
+                builder: (context, state) {
+                  if (state.categories.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
+
+                  return SliverPadding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.sp),
+                    sliver: SliverGrid(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 16.sp,
+                        crossAxisSpacing: 16.sp,
+                        childAspectRatio: 1,
+                      ),
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) => CategoryCard(category: state.categories[index]),
+                        childCount: state.categories.length,
+                      ),
+                    ),
+                  );
+                },
               ),
 
               SliverToBoxAdapter(child: SizedBox(height: 24.sp)),
