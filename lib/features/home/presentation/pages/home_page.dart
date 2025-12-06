@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/core/init/dependency_injection.dart';
+import 'package:plantapp/core/theme/app_spacings.dart';
 import 'package:plantapp/features/home/presentation/bloc/home_bloc.dart';
 import 'package:plantapp/features/home/presentation/bloc/home_event.dart';
 import 'package:plantapp/features/home/presentation/bloc/home_state.dart';
-import 'package:plantapp/core/theme/app_spacings.dart';
-import 'package:plantapp/core/theme/app_text_styles.dart';
 import 'package:plantapp/features/home/presentation/widgets/home/category_card.dart';
 import 'package:plantapp/features/home/presentation/widgets/home/home_header.dart';
 import 'package:plantapp/features/home/presentation/widgets/home/home_premium_card.dart';
@@ -35,8 +34,6 @@ class HomePage extends StatelessWidget {
               SliverToBoxAdapter(child: HomePremiumCard(onTap: () {})),
               SliverToBoxAdapter(child: SizedBox(height: AppSpacings.s24)),
 
-              SliverToBoxAdapter(child: SizedBox(height: AppSpacings.s16)),
-
               // Questions Section
               SliverToBoxAdapter(
                 child: SizedBox(
@@ -63,19 +60,6 @@ class HomePage extends StatelessWidget {
               ),
 
               SliverToBoxAdapter(child: SizedBox(height: AppSpacings.s24)),
-
-              // Categories Title
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: AppSpacings.pagePaddingHorizontal,
-                  child: Text(
-                    'Categories',
-                    style: AppTextStyles.sectionTitle,
-                  ),
-                ),
-              ),
-
-              SliverToBoxAdapter(child: SizedBox(height: AppSpacings.s16)),
 
               // Categories Grid
               BlocBuilder<HomeBloc, HomeState>(
