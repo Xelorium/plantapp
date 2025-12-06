@@ -47,14 +47,14 @@ class PaywallFeatureCard extends StatelessWidget {
           SizedBox(height: AppSpacings.s12), // 10.sp -> close to s12 or s8? s12 is safer.
           Text(
             title,
-            style: AppTextStyles.h3.copyWith(fontWeight: FontWeight.w600, color: Colors.white, fontSize: 20.sp),
+            style: AppTextStyles.h3(context).copyWith(fontWeight: FontWeight.w600, color: Colors.white, fontSize: 20.sp),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           SizedBox(height: 4.sp), // keep 4.sp or s4
           Text(
             subtitle,
-            style: AppTextStyles.bodyMedium.copyWith(color: Colors.white70, fontWeight: FontWeight.w400, fontSize: 13.sp),
+            style: AppTextStyles.bodyMedium(context).copyWith(color: Colors.white70, fontWeight: FontWeight.w400, fontSize: 13.sp),
             overflow: TextOverflow.ellipsis,
           ),
         ],
@@ -121,7 +121,7 @@ class PaywallSubscriptionCard extends StatelessWidget {
                         title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: AppTextStyles.bodyLarge.copyWith(
+                        style: AppTextStyles.bodyLarge(context).copyWith(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
                           color: Colors.white,
@@ -132,7 +132,7 @@ class PaywallSubscriptionCard extends StatelessWidget {
                         subtitle,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: AppTextStyles.bodySmall.copyWith(
+                        style: AppTextStyles.bodySmall(context).copyWith(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w400,
                           color: Colors.white70,

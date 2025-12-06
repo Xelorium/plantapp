@@ -101,7 +101,7 @@ class PaywallScreen extends StatelessWidget {
                           AutoSizeText(
                             AppStrings.accessAllFeatures,
                             maxLines: 1,
-                            style: AppTextStyles.h3.copyWith(
+                            style: AppTextStyles.h3(context).copyWith(
                               fontSize: 17.sp,
                               color: AppColors.onPrimary.withValues(alpha: .7),
                               fontWeight: FontWeight.w300,
@@ -200,7 +200,7 @@ class _Footer extends StatelessWidget {
               style: ButtonStyle(
                 fixedSize: WidgetStatePropertyAll(Size(double.infinity, AppSpacings.buttonHeight)),
               ),
-              child: AutoSizeText(AppStrings.tryFor3Days, style: AppTextStyles.button.copyWith(fontSize: 16.sp)),
+              child: AutoSizeText(AppStrings.tryFor3Days, style: AppTextStyles.button(context).copyWith(fontSize: 16.sp)),
             ),
             SizedBox(height: AppSpacings.s8),
             Expanded(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/core/constants/app_constants.dart';
 import 'package:plantapp/core/theme/app_colors.dart';
 
@@ -20,39 +21,39 @@ abstract final class AppTheme {
         error: AppColors.error,
       ),
 
-      // Typography - Using Rubik as it closely matches the geometric sans-serif in screenshots
-      textTheme: const TextTheme(
+      // Typography
+      textTheme: TextTheme(
         displayLarge: TextStyle(
-          fontSize: 30,
+          fontSize: 30.sp,
           fontWeight: FontWeight.bold,
           color: AppColors.textPrimary,
           height: 1.2,
         ),
         displayMedium: TextStyle(
-          fontSize: 24,
+          fontSize: 24.sp,
           fontWeight: FontWeight.w600,
           color: AppColors.textPrimary,
           height: 1.3,
         ),
         headlineMedium: TextStyle(
-          fontSize: 20,
+          fontSize: 20.sp,
           fontWeight: FontWeight.w600,
           color: AppColors.textPrimary,
         ),
         bodyLarge: TextStyle(
-          fontSize: 16,
+          fontSize: 15.sp,
           fontWeight: FontWeight.normal,
           color: AppColors.textPrimary,
           height: 1.5,
         ),
         bodyMedium: TextStyle(
-          fontSize: 14,
+          fontSize: 14.sp,
           fontWeight: FontWeight.normal,
           color: AppColors.textSecondary,
           height: 1.5,
         ),
         labelLarge: TextStyle(
-          fontSize: 16,
+          fontSize: 16.sp,
           fontWeight: FontWeight.w700, // Bold buttons
           color: Colors.white,
         ),
@@ -132,38 +133,38 @@ abstract final class AppTheme {
       ),
 
       // Typography
-      textTheme: const TextTheme(
+      textTheme: TextTheme(
         displayLarge: TextStyle(
-          fontSize: 30,
+          fontSize: 30.sp,
           fontWeight: FontWeight.bold,
           color: AppColors.textPrimaryDark,
           height: 1.2,
         ),
         displayMedium: TextStyle(
-          fontSize: 24,
+          fontSize: 24.sp,
           fontWeight: FontWeight.w600,
           color: AppColors.textPrimaryDark,
           height: 1.3,
         ),
         headlineMedium: TextStyle(
-          fontSize: 20,
+          fontSize: 20.sp,
           fontWeight: FontWeight.w600,
           color: AppColors.textPrimaryDark,
         ),
         bodyLarge: TextStyle(
-          fontSize: 16,
+          fontSize: 15.sp,
           fontWeight: FontWeight.normal,
           color: AppColors.textPrimaryDark,
           height: 1.5,
         ),
         bodyMedium: TextStyle(
-          fontSize: 14,
+          fontSize: 14.sp,
           fontWeight: FontWeight.normal,
           color: AppColors.textSecondaryDark,
           height: 1.5,
         ),
         labelLarge: TextStyle(
-          fontSize: 16,
+          fontSize: 16.sp,
           fontWeight: FontWeight.w700,
           color: Colors.white,
         ),

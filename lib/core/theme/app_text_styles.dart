@@ -1,61 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:plantapp/core/theme/app_colors.dart';
 
 abstract final class AppTextStyles {
   // Headings
-  static TextStyle get h1 => TextStyle(
-        fontSize: 30.sp,
-        fontWeight: FontWeight.bold,
-        color: AppColors.textPrimary,
-        height: 1.2,
-      );
+  static TextStyle h1(BuildContext context) => Theme.of(context).textTheme.displayLarge!;
 
-  static TextStyle get h2 => TextStyle(
-        fontSize: 24.sp,
-        fontWeight: FontWeight.w600,
-        color: AppColors.textPrimary,
-        height: 1.3,
-      );
+  static TextStyle h2(BuildContext context) => Theme.of(context).textTheme.displayMedium!;
 
-  static TextStyle get h3 => TextStyle(
-        fontSize: 20.sp,
-        fontWeight: FontWeight.w600,
-        color: AppColors.textPrimary,
-      );
+  static TextStyle h3(BuildContext context) => Theme.of(context).textTheme.headlineMedium!;
 
   // Body
-  static TextStyle get bodyLarge => TextStyle(
-        fontSize: 16.sp,
-        fontWeight: FontWeight.normal,
-        color: AppColors.textPrimary,
-        height: 1.5,
-      );
+  static TextStyle bodyLarge(BuildContext context) => Theme.of(context).textTheme.bodyLarge!;
 
-  static TextStyle get bodyMedium => TextStyle(
-        fontSize: 14.sp,
-        fontWeight: FontWeight.normal,
-        color: AppColors.textSecondary,
-        height: 1.5,
-      );
+  static TextStyle bodyMedium(BuildContext context) => Theme.of(context).textTheme.bodyMedium!;
 
-  static TextStyle get bodySmall => TextStyle(
-        fontSize: 12.sp,
-        fontWeight: FontWeight.normal,
-        color: AppColors.textSecondary,
-        height: 1.5,
-      );
-
+  static TextStyle bodySmall(BuildContext context) => Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 12.sp);
+  
   // Specific UI Elements
-  static TextStyle get button => TextStyle(
-        fontSize: 16.sp,
-        fontWeight: FontWeight.w700,
-        color: AppColors.onPrimary,
-      );
-      
-  static TextStyle get sectionTitle => TextStyle(
+  static TextStyle button(BuildContext context) => Theme.of(context).textTheme.labelLarge!;
+
+  static TextStyle sectionTitle(BuildContext context) => Theme.of(context).textTheme.bodyLarge!.copyWith(
         fontSize: 15.sp,
         fontWeight: FontWeight.w600,
-        color: AppColors.textPrimary,
       );
 }

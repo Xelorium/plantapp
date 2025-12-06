@@ -19,7 +19,7 @@ class GetStartedBodyContent extends StatelessWidget {
         children: [
           AutoSizeText.rich(
             textScaleFactor: 1,
-            style: AppTextStyles.h1.copyWith(fontSize: 28.sp, fontWeight: FontWeight.bold),
+            style: AppTextStyles.h1(context).copyWith(fontSize: 28.sp, fontWeight: FontWeight.bold),
             minFontSize: 8,
             overflow: TextOverflow.ellipsis,
             TextSpan(
@@ -39,7 +39,7 @@ class GetStartedBodyContent extends StatelessWidget {
           AutoSizeText(
             AppStrings.onboardingSubtitle,
             textScaleFactor: 1,
-            style: AppTextStyles.bodyLarge.copyWith(fontSize: 16.sp),
+            style: AppTextStyles.bodyLarge(context).copyWith(fontSize: 16.sp),
             minFontSize: 8,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
@@ -61,7 +61,7 @@ class GetStartedFooterContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: AutoSizeText.rich(
-        style: AppTextStyles.bodySmall.copyWith(fontSize: 11.sp),
+        style: AppTextStyles.bodySmall(context).copyWith(fontSize: 11.sp),
         minFontSize: 4,
         overflow: TextOverflow.ellipsis,
         TextSpan(

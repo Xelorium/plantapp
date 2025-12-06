@@ -48,7 +48,7 @@ class _HomeHeaderState extends State<HomeHeader> {
               Flexible(
                 child: Text(
                   AppStrings.hiPlantLover,
-                  style: AppTextStyles.bodyLarge.copyWith(fontWeight: FontWeight.w400, color: theme.colorScheme.onSurface),
+                  style: AppTextStyles.bodyLarge(context).copyWith(fontWeight: FontWeight.w400, color: theme.colorScheme.onSurface),
                 ),
               ),
             ],
@@ -59,7 +59,7 @@ class _HomeHeaderState extends State<HomeHeader> {
               Flexible(
                 child: Text(
                   AppStrings.goodAfternoon,
-                  style: AppTextStyles.h2.copyWith(color: theme.colorScheme.onSurface),
+                  style: AppTextStyles.h2(context).copyWith(color: theme.colorScheme.onSurface),
                 ),
               ),
             ],
