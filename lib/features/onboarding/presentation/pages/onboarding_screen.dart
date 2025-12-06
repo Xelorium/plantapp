@@ -55,11 +55,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 minFontSize: 8,
                 overflow: TextOverflow.ellipsis,
                 const TextSpan(
-                  text: 'Take a photo to ',
+                  text: AppStrings.takePhotoTo,
                   style: TextStyle(fontWeight: FontWeight.w500),
                   children: [
                     TextSpan(
-                      text: 'identify',
+                      text: AppStrings.identify,
                       style: TextStyle(fontWeight: FontWeight.w800),
                     ),
                   ],
@@ -83,7 +83,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ],
         ),
         AutoSizeText(
-          'the plant!',
+          AppStrings.thePlant,
           textScaleFactor: 1,
           style: TextStyle(
             fontSize: 28.sp,
@@ -116,11 +116,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 minFontSize: 8,
                 overflow: TextOverflow.ellipsis,
                 const TextSpan(
-                  text: 'Get plant ',
+                  text: AppStrings.getPlant,
                   style: TextStyle(fontWeight: FontWeight.w500),
                   children: [
                     TextSpan(
-                      text: 'care guides',
+                      text: AppStrings.careGuides,
                       style: TextStyle(fontWeight: FontWeight.w800),
                     ),
                   ],

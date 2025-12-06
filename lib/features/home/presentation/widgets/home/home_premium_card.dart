@@ -48,7 +48,7 @@ class HomePremiumCard extends StatelessWidget {
                   children: [
                     GradientRichText(
                       textSpan: TextSpan(
-                        text: 'FREE ',
+                        text: AppStrings.free,
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
@@ -57,7 +57,7 @@ class HomePremiumCard extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text: 'Premium Available',
+                            text: AppStrings.premiumAvailable,
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w600,
@@ -77,9 +77,8 @@ class HomePremiumCard extends StatelessWidget {
                       ),
                     ),
 
-                    // Tap to upgrade your account!
                     GradientText(
-                      'Tap to upgrade your account!',
+                      AppStrings.tapToUpgrade,
                       style: TextStyle(
                         fontSize: 13.sp,
                         fontWeight: FontWeight.w400,

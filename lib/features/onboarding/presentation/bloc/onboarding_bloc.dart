@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:plantapp/core/constants/app_constants.dart';
 import 'package:plantapp/features/onboarding/domain/usecases/set_onboarding_complete_usecase.dart';
 
 part 'onboarding_event.dart';

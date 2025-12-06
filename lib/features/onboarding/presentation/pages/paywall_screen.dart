@@ -15,10 +15,9 @@ class PaywallScreen extends StatelessWidget {
   const PaywallScreen({super.key});
 
   List<(String iconPath, String title, String subtitle)> get features => [
-    // MB TODO: STRINGIFY
-    (AppAssets.scannerFeatureIconSvg, 'Unlimited', 'Plant Identify'),
-    (AppAssets.speedFeatureIconSvg, 'Faster', 'Process'),
-    (AppAssets.speedFeatureIconSvg, 'Detailed', 'Plant care'),
+    (AppAssets.scannerFeatureIconSvg, AppStrings.unlimited, AppStrings.plantIdentify),
+    (AppAssets.speedFeatureIconSvg, AppStrings.faster, AppStrings.process),
+    (AppAssets.speedFeatureIconSvg, AppStrings.detailed, AppStrings.plantCare),
   ];
 
   @override
@@ -79,8 +78,7 @@ class PaywallScreen extends StatelessWidget {
                               text: AppConstants.appName,
                               children: [
                                 TextSpan(
-                                  // MB TODO: STRINGIFY
-                                  text: ' Premium',
+                                  text: AppStrings.premium,
                                   style: TextStyle(fontWeight: FontWeight.w300),
                                 ),
                               ],
@@ -94,8 +92,7 @@ class PaywallScreen extends StatelessWidget {
                           ),
 
                           AutoSizeText(
-                            // MB TODO: STRINGIFY
-                            'Access All Features',
+                            AppStrings.accessAllFeatures,
                             maxLines: 1,
                             style: TextStyle(
                               fontSize: 17.sp,
@@ -196,8 +193,7 @@ class _Footer extends StatelessWidget {
               style: ButtonStyle(
                 fixedSize: WidgetStatePropertyAll(Size(double.infinity, 56.sp)),
               ),
-              // MB TODO: STRINGIFY
-              child: AutoSizeText('Try for 3 days', style: TextStyle(fontSize: 16.sp)),
+              child: AutoSizeText(AppStrings.tryFor3Days, style: TextStyle(fontSize: 16.sp)),
             ),
             SizedBox(height: 8.sp),
             Expanded(
@@ -205,8 +201,7 @@ class _Footer extends StatelessWidget {
                 children: [
                   const Expanded(
                     child: AutoSizeText(
-                      // MB TODO: STRINGIFY
-                      'After the 3-day free trial period you’ll be charged ₺274.99 per year unless you cancel\nbefore the trial expires. Yearly Subscription is Auto-Renewable',
+                      AppStrings.paywallDisclaimer,
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       minFontSize: 2,
@@ -216,17 +211,13 @@ class _Footer extends StatelessWidget {
                   Expanded(
                     child: AutoSizeText.rich(
                       TextSpan(
-                        // MB TODO: STRINGIFY
-                        text: 'Terms',
+                        text: AppStrings.terms,
                         recognizer: TapGestureRecognizer()..onTap = onTermsPressed,
                         children: [
-                          const TextSpan(text: '  •  '),
-                          // MB TODO: STRINGIFY
-                          TextSpan(text: 'Privacy', recognizer: TapGestureRecognizer()..onTap = onPrivacyPressed),
-                          // MB TODO: STRINGIFY
-                          const TextSpan(text: '  •  '),
-                          // MB TODO: STRINGIFY
-                          TextSpan(text: 'Restore', recognizer: TapGestureRecognizer()..onTap = onRestorePressed),
+                          const TextSpan(text: AppStrings.bulletSeparator),
+                          TextSpan(text: AppStrings.privacy, recognizer: TapGestureRecognizer()..onTap = onPrivacyPressed),
+                          const TextSpan(text: AppStrings.bulletSeparator),
+                          TextSpan(text: AppStrings.restore, recognizer: TapGestureRecognizer()..onTap = onRestorePressed),
                         ],
                       ),
                       textAlign: TextAlign.center,

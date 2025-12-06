@@ -733,7 +733,7 @@ return $default(_that.currentScreenIndex,_that.onboardingPageIndex,_that.selecte
 
 
 class _OnboardingState implements OnboardingState {
-  const _OnboardingState({this.currentScreenIndex = 0, this.onboardingPageIndex = 0, this.selectedSubscriptionPlanId = 'yearly', this.isOnboardingCompleted = false, this.isLoading = false, this.error});
+  const _OnboardingState({this.currentScreenIndex = 0, this.onboardingPageIndex = 0, this.selectedSubscriptionPlanId = AppStrings.yearlyPlanId, this.isOnboardingCompleted = false, this.isLoading = false, this.error});
   
 
 @override@JsonKey() final  int currentScreenIndex;

@@ -1,5 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:plantapp/core/constants/app_constants.dart';
 
 @RoutePage()
 class DiagnoseScreen extends StatelessWidget {
@@ -9,7 +10,7 @@ class DiagnoseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: Text(
-        'Diagnose',
+        AppStrings.diagnose,
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
       ),
     );

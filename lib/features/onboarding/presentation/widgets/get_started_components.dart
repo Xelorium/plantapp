@@ -21,7 +21,7 @@ class GetStartedBodyContent extends StatelessWidget {
             minFontSize: 8,
             overflow: TextOverflow.ellipsis,
             TextSpan(
-              text: 'Welcome to ',
+              text: AppStrings.welcomeTo,
               style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontWeight: FontWeight.w400),
               children: const [
                 TextSpan(
@@ -63,10 +63,10 @@ class GetStartedFooterContent extends StatelessWidget {
         minFontSize: 4,
         overflow: TextOverflow.ellipsis,
         TextSpan(
-          text: 'By tapping next, you are agreeing to PlantID\n',
+          text: AppStrings.byTappingNext,
           children: [
             TextSpan(
-              text: 'Terms of Use',
+              text: AppStrings.termsOfUse,
               recognizer: TapGestureRecognizer()..onTap = onTermsTap,
               style: const TextStyle(
                 decoration: TextDecoration.underline,
@@ -74,11 +74,11 @@ class GetStartedFooterContent extends StatelessWidget {
               ),
             ),
             const TextSpan(
-              text: ' & ',
+              text: AppStrings.and,
               style: TextStyle(decoration: TextDecoration.none),
             ),
             TextSpan(
-              text: 'Privacy Policy',
+              text: AppStrings.privacyPolicy,
               recognizer: TapGestureRecognizer()..onTap = onPrivacyTap,
               style: const TextStyle(
                 decoration: TextDecoration.underline,
@@ -86,7 +86,7 @@ class GetStartedFooterContent extends StatelessWidget {
               ),
             ),
             const TextSpan(
-              text: '.',
+              text: AppStrings.period,
               style: TextStyle(decoration: TextDecoration.none),
             ),
           ],

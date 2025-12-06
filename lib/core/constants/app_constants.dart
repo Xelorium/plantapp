@@ -11,9 +11,70 @@ abstract final class AppUrls {
 }
 
 abstract final class AppStrings {
+  // General UI
   static const String onboardingSubtitle = 'Identify more than 3000+ plants and 88% accuracy.';
   static const String getStarted = 'Get Started';
   static const String continueText = 'Continue';
+  
+  // Navigation Labels
+  static const String home = 'Home';
+  static const String diagnose = 'Diagnose';
+  static const String myGarden = 'My Garden';
+  static const String profile = 'Profile';
+  static const String scanner = 'Scanner';
+  
+  // Onboarding Content
+  static const String takePhotoTo = 'Take a photo to ';
+  static const String identify = 'identify';
+  static const String thePlant = 'the plant!';
+  static const String getPlant = 'Get plant ';
+  static const String careGuides = 'care guides';
+  
+  // Welcome and Greeting
+  static const String welcomeTo = 'Welcome to ';
+  static const String hiPlantLover = 'Hi, plant lover!';
+  static const String goodAfternoon = 'Good Afternoon! ⛅';
+  static const String searchForPlants = 'Search for plants';
+  
+  // Premium Features
+  static const String free = 'FREE ';
+  static const String premiumAvailable = 'Premium Available';
+  static const String premium = ' Premium';
+  static const String tapToUpgrade = 'Tap to upgrade your account!';
+  static const String accessAllFeatures = 'Access All Features';
+  
+  // Paywall Features
+  static const String unlimited = 'Unlimited';
+  static const String plantIdentify = 'Plant Identify';
+  static const String faster = 'Faster';
+  static const String process = 'Process';
+  static const String detailed = 'Detailed';
+  static const String plantCare = 'Plant care';
+  static const String tryFor3Days = 'Try for 3 days';
+  
+  // Legal and Terms
+  static const String byTappingNext = 'By tapping next, you are agreeing to PlantID\n';
+  static const String termsOfUse = 'Terms of Use';
+  static const String and = ' & ';
+  static const String privacyPolicy = 'Privacy Policy';
+  static const String period = '.';
+  static const String terms = 'Terms';
+  static const String privacy = 'Privacy';
+  static const String restore = 'Restore';
+  static const String bulletSeparator = '  •  ';
+  
+  // Subscription Plans
+  static const String monthlyPlanId = 'monthly';
+  static const String monthlyPlanTitle = '1 Month';
+  static const String monthlyPlanSubtitle = r'$32.99 per month, auto renewable';
+  static const String yearlyPlanId = 'yearly';
+  static const String yearlyPlanTitle = '1 Year';
+  static const String yearlyPlanSubtitle = r'First 3 days free, then $529,99/year';
+  static const String yearlyPlanBadge = 'Save 50%';
+  static const String paywallDisclaimer = 'After the 3-day free trial period you\'ll be charged ₺274.99 per year unless you cancel\\nbefore the trial expires. Yearly Subscription is Auto-Renewable';
+  
+  // Empty States
+  static const String empty = '';
 }
 
 abstract final class AppAssets {

@@ -26,27 +26,27 @@ class _HomeBottomBarState extends State<HomeBottomBar> {
   final List<BottomBarItem> _tabs = [
     const BottomBarItem(
       iconPath: AppAssets.navBarHomeSvg,
-      label: 'Home',
+      label: AppStrings.home,
       isActive: false,
     ),
     const BottomBarItem(
       iconPath: AppAssets.navBarDiagnoseSvg,
-      label: 'Diagnose',
+      label: AppStrings.diagnose,
       isActive: false,
     ),
     const BottomBarItem(
       iconPath: null,
-      label: '',
+      label: AppStrings.empty,
       isActive: false,
     ),
     const BottomBarItem(
       iconPath: AppAssets.navBarGardenSvg,
-      label: 'My Garden',
+      label: AppStrings.myGarden,
       isActive: false,
     ),
     const BottomBarItem(
       iconPath: AppAssets.navBarProfileSvg,
-      label: 'Profile',
+      label: AppStrings.profile,
       isActive: false,
     ),
   ];

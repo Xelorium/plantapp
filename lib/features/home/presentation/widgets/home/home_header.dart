@@ -45,7 +45,7 @@ class _HomeHeaderState extends State<HomeHeader> {
             children: [
               Flexible(
                 child: Text(
-                  'Hi, plant lover!',
+                  AppStrings.hiPlantLover,
                   style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400, color: theme.colorScheme.onSurface),
                 ),
               ),
@@ -56,7 +56,7 @@ class _HomeHeaderState extends State<HomeHeader> {
             children: [
               Flexible(
                 child: Text(
-                  'Good Afternoon! ⛅',
+                  AppStrings.goodAfternoon,
                   style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w500, color: theme.colorScheme.onSurface),
                 ),
               ),
@@ -69,7 +69,7 @@ class _HomeHeaderState extends State<HomeHeader> {
             onTapUpOutside: (_) => FocusScope.of(context).unfocus(),
             onSubmitted: widget.onSearchSubmitted,
             decoration: InputDecoration(
-              hintText: 'Search for plants',
+              hintText: AppStrings.searchForPlants,
               prefixIcon: const Icon(Icons.search),
               suffixIcon: _searchController.text.isNotEmpty
                   ? GestureDetector(

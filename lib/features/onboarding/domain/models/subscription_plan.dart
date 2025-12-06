@@ -1,3 +1,5 @@
+import 'package:plantapp/core/constants/app_constants.dart';
+
 class SubscriptionPlan {
   const SubscriptionPlan({
     required this.id,
@@ -13,15 +15,15 @@ class SubscriptionPlan {
 
   static const List<SubscriptionPlan> availablePlans = [
     SubscriptionPlan(
-      id: 'monthly',
-      title: '1 Month',
-      subtitle: r'$32.99 per month, auto renewable',
+      id: AppStrings.monthlyPlanId,
+      title: AppStrings.monthlyPlanTitle,
+      subtitle: AppStrings.monthlyPlanSubtitle,
     ),
     SubscriptionPlan(
-      id: 'yearly',
-      title: '1 Year',
-      subtitle: r'First 3 days free, then $529,99/year',
-      badgeText: 'Save 50%',
+      id: AppStrings.yearlyPlanId,
+      title: AppStrings.yearlyPlanTitle,
+      subtitle: AppStrings.yearlyPlanSubtitle,
+      badgeText: AppStrings.yearlyPlanBadge,
     ),
   ];
 }

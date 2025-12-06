@@ -1,5 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:plantapp/core/constants/app_constants.dart';
 
 @RoutePage()
 class ScannerScreen extends StatelessWidget {
@@ -9,7 +10,7 @@ class ScannerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: Text(
-        'Scanner',
+        AppStrings.scanner,
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
       ),
     );
