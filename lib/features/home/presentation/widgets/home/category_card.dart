@@ -3,6 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/features/home/data/models/category_model.dart';
+import 'package:plantapp/core/theme/app_spacings.dart';
+import 'package:plantapp/core/theme/app_text_styles.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({required this.category, super.key});
@@ -18,7 +20,7 @@ class CategoryCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppSpacings.radius),
         border: Border.all(color: theme.colorScheme.onSurface.withValues(alpha: 0.1)),
       ),
       child: Stack(
@@ -28,7 +30,7 @@ class CategoryCard extends StatelessWidget {
               right: 0,
               bottom: 0,
               child: ClipRRect(
-                borderRadius: const BorderRadius.only(bottomRight: Radius.circular(12)),
+                borderRadius: BorderRadius.only(bottomRight: Radius.circular(AppSpacings.radius)),
                 child: CachedNetworkImage(
                   imageUrl: imageUrl,
                   height: .4.sw,
@@ -39,16 +41,12 @@ class CategoryCard extends StatelessWidget {
             ),
           ],
           Padding(
-            padding: EdgeInsets.all(16.sp),
+            padding: AppSpacings.cardPadding,
             child: SizedBox(
               width: .3.sw,
               child: AutoSizeText(
                 category.title,
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w500,
-                  color: theme.colorScheme.onSurface,
-                ),
+                style: AppTextStyles.sectionTitle.copyWith(fontSize: 18.sp),
                 maxLines: 2,
               ),
             ),

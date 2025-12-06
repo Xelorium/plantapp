@@ -3,6 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/features/home/data/models/question_model.dart';
+import 'package:plantapp/core/theme/app_spacings.dart';
+import 'package:plantapp/core/theme/app_text_styles.dart';
 
 class QuestionCard extends StatelessWidget {
   const QuestionCard({required this.question, super.key});
@@ -14,7 +16,7 @@ class QuestionCard extends StatelessWidget {
     return Container(
       width: .7.sw,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppSpacings.radius),
         image: DecorationImage(
           image: CachedNetworkImageProvider(question.imageUri),
           fit: BoxFit.cover,
@@ -22,7 +24,7 @@ class QuestionCard extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(AppSpacings.radius),
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -33,18 +35,14 @@ class QuestionCard extends StatelessWidget {
             stops: const [0.5, 1.0],
           ),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 14.sp, vertical: 10.sp),
+        padding: EdgeInsets.symmetric(horizontal: AppSpacings.s16, vertical: AppSpacings.s12),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AutoSizeText(
               question.title,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 15.sp,
-                fontWeight: FontWeight.w500,
-              ),
+              style: AppTextStyles.bodyLarge.copyWith(color: Colors.white, fontWeight: FontWeight.w500),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),

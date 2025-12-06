@@ -3,6 +3,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/core/constants/app_constants.dart';
+import 'package:plantapp/core/theme/app_spacings.dart';
+import 'package:plantapp/core/theme/app_text_styles.dart';
 
 class GetStartedBodyContent extends StatelessWidget {
   const GetStartedBodyContent({super.key});
@@ -17,7 +19,7 @@ class GetStartedBodyContent extends StatelessWidget {
         children: [
           AutoSizeText.rich(
             textScaleFactor: 1,
-            style: TextStyle(fontSize: 28.sp, fontWeight: FontWeight.bold),
+            style: AppTextStyles.h1.copyWith(fontSize: 28.sp, fontWeight: FontWeight.bold),
             minFontSize: 8,
             overflow: TextOverflow.ellipsis,
             TextSpan(
@@ -33,11 +35,11 @@ class GetStartedBodyContent extends StatelessWidget {
             maxLines: 1,
             textAlign: TextAlign.start,
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: AppSpacings.s8),
           AutoSizeText(
             AppStrings.onboardingSubtitle,
             textScaleFactor: 1,
-            style: TextStyle(fontSize: 16.sp),
+            style: AppTextStyles.bodyLarge.copyWith(fontSize: 16.sp),
             minFontSize: 8,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
@@ -59,7 +61,7 @@ class GetStartedFooterContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: AutoSizeText.rich(
-        style: TextStyle(fontSize: 11.sp),
+        style: AppTextStyles.bodySmall.copyWith(fontSize: 11.sp),
         minFontSize: 4,
         overflow: TextOverflow.ellipsis,
         TextSpan(

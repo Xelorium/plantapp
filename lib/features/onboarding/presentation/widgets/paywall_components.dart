@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:plantapp/core/theme/app_colors.dart';
+import 'package:plantapp/core/theme/app_spacings.dart';
+import 'package:plantapp/core/theme/app_text_styles.dart';
 
 class PaywallFeatureCard extends StatelessWidget {
   const PaywallFeatureCard({
@@ -19,10 +21,10 @@ class PaywallFeatureCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: .42.sw,
-      padding: const EdgeInsets.all(16),
+      padding: AppSpacings.cardPadding,
       decoration: BoxDecoration(
         color: Colors.white10,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(14), // keeping 14? Spacings has radius 12. Let's stick to consistent radius if possible, or create s14. The design might require slightly diff radius. I'll use Spacings.radius (12) for consistency unless visual break.
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,17 +44,17 @@ class PaywallFeatureCard extends StatelessWidget {
               colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
             ),
           ),
-          SizedBox(height: 10.sp),
+          SizedBox(height: AppSpacings.s12), // 10.sp -> close to s12 or s8? s12 is safer.
           Text(
             title,
-            style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white, fontSize: 20.sp),
+            style: AppTextStyles.h3.copyWith(fontWeight: FontWeight.w600, color: Colors.white, fontSize: 20.sp),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          SizedBox(height: 4.sp),
+          SizedBox(height: 4.sp), // keep 4.sp or s4
           Text(
             subtitle,
-            style: TextStyle(color: Colors.white70, fontWeight: FontWeight.w400, fontSize: 13.sp),
+            style: AppTextStyles.bodyMedium.copyWith(color: Colors.white70, fontWeight: FontWeight.w400, fontSize: 13.sp),
             overflow: TextOverflow.ellipsis,
           ),
         ],
@@ -92,7 +94,7 @@ class PaywallSubscriptionCard extends StatelessWidget {
             padding: EdgeInsets.all(14.sp),
             decoration: BoxDecoration(
               color: AppColors.paywallBackground,
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(14), // Use consistent radius? 14 seems specific to paywall.
               border: isSelected ? Border.all(color: AppColors.primary, width: 1.5) : Border.all(color: Colors.white30, width: 0.5),
             ),
             child: Row(
@@ -110,7 +112,7 @@ class PaywallSubscriptionCard extends StatelessWidget {
                   ),
                   child: isSelected ? Icon(Icons.circle, size: 10.sp, color: Colors.white) : null,
                 ),
-                SizedBox(width: 12.w),
+                SizedBox(width: AppSpacings.s12),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,7 +121,7 @@ class PaywallSubscriptionCard extends StatelessWidget {
                         title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
+                        style: AppTextStyles.bodyLarge.copyWith(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
                           color: Colors.white,
@@ -130,7 +132,7 @@ class PaywallSubscriptionCard extends StatelessWidget {
                         subtitle,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
+                        style: AppTextStyles.bodySmall.copyWith(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w400,
                           color: Colors.white70,
