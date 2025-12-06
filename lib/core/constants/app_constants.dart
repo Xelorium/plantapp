@@ -24,6 +24,8 @@ abstract final class AppAssets {
   static const String headerBackground = 'assets/images/header_bg.png';
 
   static const String brushLine = 'assets/images/brush_line.png';
+  static const String mailIconSvg = 'assets/icons/mail_icon.svg';
+  static const String rightArrowIconSvg = 'assets/icons/right_arrow_icon.svg';
 
   static const String scannerFeatureIconSvg = 'assets/icons/scanner_feature_icon.svg';
   static const String speedFeatureIconSvg = 'assets/icons/speed_feature_icon.svg';

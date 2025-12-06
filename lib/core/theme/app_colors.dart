@@ -14,7 +14,6 @@ class AppColors {
   // Backgrounds
   static const Color background = Color(0xFFFFFFFF);
   static const Color surface = Color(0xFFF5F5F5); // Light grey for inputs/backgrounds
-  // Home page background #FBFAFA
   static const Color homeBackground = Color(0xFFFBFAFA);
 
   // Text
@@ -32,6 +31,12 @@ class AppColors {
   static const Color divider = Color(0xFFF3F4F6);
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
+
+  static const Color premiumBannerBackground = Color(0xFF24201A); // Dark background for premium banner
+  // #E5C990 for text highlight in premium banner
+  static const Color premiumBannerTextHighlight = Color(0xFFE5C990);
+  // #E4B046 for secondary highlight in premium banner
+  static const Color premiumBannerTextSecondaryHighlight = Color(0xFFE4B046);
 
   // FBA Colors
   static const Color fbaBackground = Color(0xFF28AF6E); // Light greenish background

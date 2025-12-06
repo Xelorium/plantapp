@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plantapp/features/home/presentation/widgets/home/home_header.dart';
+import 'package:plantapp/features/home/presentation/widgets/home/home_premium_card.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -15,21 +18,16 @@ class HomePage extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.symmetric(vertical: 16.sp),
         children: [
-          const HomeHeader(),
-
-          const SizedBox(height: 16),
-
-          const SizedBox(height: 20),
-
-          Container(
-            height: 80,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(16),
-            ),
+          HomeHeader(
+            onSearchSubmitted: (query) => log('Search submitted: $query'),
           ),
 
-          const SizedBox(height: 20),
+          SizedBox(height: 24.sp),
+          HomePremiumCard(
+            onTap: () {},
+          ),
+
+          SizedBox(height: 24.sp),
         ],
       ),
     );
