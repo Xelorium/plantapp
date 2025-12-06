@@ -24,45 +24,51 @@ class HomePage extends StatelessWidget {
       create: (context) => getIt<HomeBloc>()..add(const HomeEvent.started()),
       child: Scaffold(
         body: SafeArea(
-          child: ListView(
-            padding: EdgeInsets.symmetric(vertical: 16.sp),
-            children: [
-              HomeHeader(
-                onSearchSubmitted: (query) => log('Search submitted: $query'),
-              ),
-
-              SizedBox(height: 24.sp),
-              HomePremiumCard(
-                onTap: () {},
-              ),
-
-              SizedBox(height: 24.sp),
-
-              // Questions Section
-              SizedBox(
-                height: 164.sp,
-                width: double.infinity,
-                child: BlocBuilder<HomeBloc, HomeState>(
-                  builder: (context, state) {
-                    if (state.status == HomeStatus.loading) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-
-                    if (state.questions.isEmpty) {
-                      return const SizedBox.shrink();
-                    }
-
-                    return ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      padding: EdgeInsets.symmetric(horizontal: 20.sp),
-                      itemBuilder: (context, index) => QuestionCard(question: state.questions[index], key: key),
-                      separatorBuilder: (context, index) => SizedBox(width: 10.sp),
-
-                      itemCount: state.questions.length,
-                    );
-                  },
+          child: CustomScrollView(
+            slivers: [
+              // Header
+              SliverPadding(
+                padding: EdgeInsets.only(top: 16.sp),
+                sliver: SliverToBoxAdapter(
+                  child: HomeHeader(
+                    onSearchSubmitted: (query) => log('Search submitted: $query'),
+                  ),
                 ),
               ),
+
+              SliverToBoxAdapter(child: SizedBox(height: 24.sp)),
+
+              // Premium Card
+              SliverToBoxAdapter(child: HomePremiumCard(onTap: () {})),
+
+              SliverToBoxAdapter(child: SizedBox(height: 24.sp)),
+
+              // Questions Section
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 164.sp,
+                  width: double.infinity,
+                  child: BlocBuilder<HomeBloc, HomeState>(
+                    builder: (context, state) {
+                      if (state.status == HomeStatus.loading) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+
+                      if (state.questions.isEmpty) return const SizedBox.shrink();
+
+                      return ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        padding: EdgeInsets.symmetric(horizontal: 20.sp),
+                        itemBuilder: (context, index) => QuestionCard(question: state.questions[index]),
+                        separatorBuilder: (context, index) => SizedBox(width: 10.sp),
+                        itemCount: state.questions.length,
+                      );
+                    },
+                  ),
+                ),
+              ),
+
+              SliverToBoxAdapter(child: SizedBox(height: 24.sp)),
             ],
           ),
         ),
