@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'category_model.freezed.dart';
 part 'category_model.g.dart';
@@ -10,12 +11,16 @@ abstract class CategoryModel with _$CategoryModel {
     required String name,
     required String title,
     required int rank,
-    required CategoryImage? image,
+    @JsonKey(toJson: _imageToJson, fromJson: _imageFromJson) required CategoryImage? image,
   }) = _CategoryModel;
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) =>
       _$CategoryModelFromJson(json);
 }
+
+Map<String, dynamic>? _imageToJson(CategoryImage? image) => image?.toJson();
+CategoryImage? _imageFromJson(Map<String, dynamic>? json) => 
+    json == null ? null : CategoryImage.fromJson(json);
 
 @freezed
 abstract class CategoryImage with _$CategoryImage {

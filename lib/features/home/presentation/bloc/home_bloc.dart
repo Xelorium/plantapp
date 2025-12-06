@@ -36,7 +36,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           );
 
           questionsResult.fold(
-            (failure) => errorMsg = failure.message,
+            (failure) {
+              if (errorMsg == null) {
+                errorMsg = failure.message;
+              }
+            },
             (data) => currentQuestions = data,
           );
 
